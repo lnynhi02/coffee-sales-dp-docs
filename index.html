@@ -1,0 +1,1101 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lnynhi02.github.io/coffee-sales-dp-docs/">
+      
+      
+      
+        <link rel="next" href="overview/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>Coffee Sales Data Pipeline</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/extra.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Coffee Sales Data Pipeline" class="md-header__button md-logo" aria-label="Coffee Sales Data Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Coffee Sales Data Pipeline
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Coffee Sales Data Pipeline" class="md-nav__button md-logo" aria-label="Coffee Sales Data Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Coffee Sales Data Pipeline
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-business-problem-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Business Problem (Simulation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-business-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Business Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-database-design-to-store-raw-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Database Design to store raw data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-data-warehouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Data Warehouse
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Data Warehouse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#staging-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staging Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dimension Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fact-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fact Tables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-elt-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. ELT Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ELT Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elt-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELT Diagram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tech-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tech Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Deployment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="streaming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streaming Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="batch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Batch Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Additional Knowledge
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Additional Knowledge
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="kafkaconnect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kafka Connect versus Kafka Producer and Consumer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/lnynhi02/coffee-sales-data-pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub Repository
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#i-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      I. Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="I. Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-business-problem-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Business Problem (Simulation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Data Source
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-business-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Business Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-database-design-to-store-raw-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Database Design to store raw data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-data-warehouse" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Data Warehouse
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Data Warehouse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#staging-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staging Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimension-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dimension Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fact-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fact Tables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-elt-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. ELT Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ELT Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#elt-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELT Diagram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Task Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tech-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tech Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ii-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      II. Deployment
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="documentation"><strong><em>📝 DOCUMENTATION</em></strong></h1>
+<h2 id="i-design">I. Design</h2>
+<h3 id="1-business-problem-simulation">1. Business Problem (Simulation)</h3>
+<p>This project simulates transaction data from a coffee shop. The data used includes:</p>
+<ul>
+<li><code>transactions</code>: Raw transactions data generated for the coffee shop.</li>
+<li><code>product</code>:The list of products that are currently being sold in the coffee shops.</li>
+<li><code>store</code>: The different branches or locations of the coffee shop</li>
+<li><code>payment_method</code>: The payment method used when ordering.</li>
+</ul>
+<h3 id="2-data-source">2. Data Source</h3>
+<p>The data is divided into several CSV files and used as follows:</p>
+<ol>
+<li><code>product.csv</code>: A list of products sold in the coffee shop.  <ul>
+<li>product_id: Unique ID of the product  </li>
+<li>name: Name of the product  </li>
+<li>category_id: The category ID that the product belongs to</li>
+<li>price: The price of the product</li>
+</ul>
+</li>
+<li><code>product_category.csv</code>: The category of the product.<ul>
+<li>id: Unique ID for each product category</li>
+<li>name: Name of the product category</li>
+<li>modified_date: The date the category data was last updated</li>
+</ul>
+</li>
+<li><code>store.csv</code>: The branches of the coffee shop.<ul>
+<li>id: Unique ID for each coffee shop location</li>
+<li>name: Name of the coffee shop branch</li>
+<li>address: The address of the coffee shop</li>
+<li>district: The district where the coffee shop is located</li>
+</ul>
+</li>
+<li><code>payment_method.csv</code>: The payment methods supported by the coffee shop<ul>
+<li>id: Unique ID for each payment method</li>
+<li>method: The name of the payment method (e.g., Cash, Credit Card, etc.)</li>
+<li>modified_date: The date when the payment method data was last updated.</li>
+</ul>
+</li>
+<li><code>transactions</code>: This JSON data is generated automatically via a Python script. It includes detailed information about the transactions and loaded into MongoDB.<ul>
+<li>timestamp: The date and time of the transaction</li>
+<li>store_id: The ID of the store where the transaction took place</li>
+<li>total_amount: The total amount of the transaction</li>
+<li>payment_method: The payment method used for the transaction</li>
+<li>currency: The currency of the transaction</li>
+<li>items: An array of the products sold during the transaction, where each item contains<ul>
+<li>product_id: Unique ID of the product</li>
+<li>name: Name of the product</li>
+<li>category: Category name of the product</li>
+<li>quantity: The quantity of the product sold</li>
+<li>subtotal: The total amount for that product (price × quantity)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-business-requirements">3. Business Requirements</h3>
+<ol>
+<li>
+<p>Real-time Analysis: Analyze transactions in real-time to monitor trends</p>
+<ul>
+<li>Identify the busiest times during the day to optimize staffing and inventory.</li>
+<li>Real-time tracking of the number of products sold, revenue, and number of bills.</li>
+<li>Monitor the most frequently used payment methods to understand customer preferences.</li>
+<li>Monitor which branch of the coffee shop generates the most revenue.</li>
+</ul>
+</li>
+<li>
+<p>Daily &amp; Weekly Analysis: Generate comprehensive daily and weekly reports to summarize sales performance and trends.</p>
+<ul>
+<li>Daily Sales Summary: Total sales and transaction volume for each store.</li>
+<li>Product Sales Breakdown: A report detailing the performance of each product and its category.</li>
+<li>Store Performance: Compare sales performance across different branches to identify high-performing stores.</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-database-design-to-store-raw-data">4. Database Design to store raw data</h3>
+<ol>
+<li><code>transactions</code>: Raw transactions coffee data that loaded into PostgreSQL from MongoDB<ul>
+<li>_id: Unique ID of each transaction generated form source database (in this case MongoDB)</li>
+<li>timestamp: The date and time of the transaction     </li>
+<li>store_id:  Unique ID of the store</li>
+<li>total_amount: The total amount of the transaction</li>
+<li>payment_method: The payment method used for the transaction</li>
+<li>currency: The currency of the transaction</li>
+<li>items: An array of the products sold during the transaction, where each item contains<ul>
+<li>product_id: Unique ID of the product</li>
+<li>name: Name of the product</li>
+<li>category: Category name of the product     </li>
+<li>quantity: The quantity of the product sold</li>
+<li>subtotal: The total amount for that product (price × quantity)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>dbo_raw.product</code>: Loaded from <code>product.csv</code><ul>
+<li>product_id</li>
+<li>name</li>
+<li>category_id</li>
+<li>price</li>
+</ul>
+</li>
+<li><code>dbo_raw.product_category</code>: Loaded from <code>product_category.csv</code><ul>
+<li>id</li>
+<li>name</li>
+<li>modified_date</li>
+</ul>
+</li>
+<li><code>dbo_raw.payment_method</code>: Loaded from <code>payment_method.csv</code><ul>
+<li>id</li>
+<li>method</li>
+<li>modified_date</li>
+</ul>
+</li>
+<li><code>dbo_raw.store</code>: Loaded from <code>store.csv</code><ul>
+<li>id</li>
+<li>name</li>
+<li>address</li>
+<li>district</li>
+</ul>
+</li>
+</ol>
+<h3 id="5-data-warehouse">5. Data Warehouse</h3>
+<p>In the data warehouse, we structure data into <strong>staging tables</strong>, <strong>dimension tables</strong>, and <strong>fact tables</strong> to support analytical queries efficiently.</p>
+<h4 id="staging-tables">Staging Tables</h4>
+<p>Staging tables contain transformed data, preparing it for fact and dimension tables. The table <code>stg_sales</code> reads data from the source system (PostgreSQL in this case) and transforms it. For example, in the raw <code>transactions</code> table, the <code>items</code> column is stored as an array. We explode it into multiple rows to make analysis easier.</p>
+<ul>
+<li><code>stg_sales</code><ul>
+<li>sales_id: The natural key of the transaction (renamed from <code>_id</code> from source data)</li>
+<li>timestamp: The date and time of the transaction</li>
+<li>store_id: The natural key of the store</li>
+<li>payment_method_id: The natural key of the payment method</li>
+<li>product_id: The natural key of the product</li>
+<li>quantity: The quantity of the product sold</li>
+<li>subtotal: The total amount for that product (price × quantity)</li>
+</ul>
+</li>
+</ul>
+<h4 id="dimension-tables">Dimension Tables</h4>
+<p>Dimension tables store attributes of key entities. In this project, we have three dimension tables: <code>dim_product</code>, <code>dim_store</code>, and <code>dim_payment</code>.</p>
+<ol>
+<li><code>dim_product</code><ul>
+<li>product_key: Surrogate key of the product</li>
+<li>product_id: The natural key of the product (from <code>dbo_raw.product</code>)</li>
+<li>product_name: Name of the product</li>
+<li>category_name: Category that the product belongs to (from <code>dbo_raw.product_category</code>)</li>
+<li>price: Price of the product</li>
+</ul>
+</li>
+<li><code>dim_store</code><ul>
+<li>store_key: Surrogate key of the store</li>
+<li>store_id: The natural key of the store (from <code>dbo_raw.store</code>)</li>
+<li>store_name: Name of the store</li>
+<li>address: Address of the store</li>
+<li>district: District where the coffee shop is located</li>
+</ul>
+</li>
+<li><code>dim_payment</code><ul>
+<li>payment_method_key: Surrogate key of the payment method</li>
+<li>payment_method_id: The natural key of payment method (from <code>dbo_raw.payment_method</code>)</li>
+<li>payment_method: Name of the payment method</li>
+<li>modified_date: The date when the payment method data was last updated</li>
+</ul>
+</li>
+</ol>
+<h4 id="fact-tables">Fact Tables</h4>
+<p>Fact tables store transactional data, linking to dimension tables via foreign keys. In this project, we have one fact table: <code>fact_sales</code></p>
+<ul>
+<li><code>fact_sales</code><ul>
+<li>sales_key: Unique identifier for each row, generated using a combination of sales_id and product_id</li>
+<li>store_key: Foreign key referencing <code>dim_store</code></li>
+<li>product_key: Foreign key referencing <code>dim_product</code></li>
+<li>payment_method_key: Foreign key referencing <code>dim_payment</code></li>
+<li>sales_id: The natural key of the sale (from raw data <code>transactions</code>)</li>
+<li>timestamp: The date and time of the transaction</li>
+<li>quantity: The quantity of the product sold</li>
+<li>revenue: The total amount for that product (renamed from <code>subtotal</code>)</li>
+</ul>
+</li>
+</ul>
+<p>The following diagram illustrates the relationship between the dimension and fact tables mentioned above:<br>
+<img alt="Image" src="img/coffee_dw_diagram.png"></p>
+<h3 id="6-elt-design">6. ELT Design</h3>
+<h4 id="elt-diagram">ELT Diagram</h4>
+<p><img alt="Image" src="img/elt-diagram.png"></p>
+<h4 id="task-flow">Task Flow</h4>
+<ol>
+<li>
+<p>Streaming Flow
+<img alt="Image" src="img/streaming-flow.png"></p>
+</li>
+<li>
+<p>Batch Flow
+<img alt="Image" src="img/batch-flow.png"></p>
+</li>
+</ol>
+<h4 id="tech-selection">Tech Selection</h4>
+<p><img alt="Image" src="img/tech-selection.png"></p>
+<ol>
+<li>
+<p>Streaming Pipeline</p>
+<ul>
+<li><code>KafkaConnect</code><ul>
+<li>Enables seamless data integration between systems without requiring custom code—just create a JSON configuration file.</li>
+<li>Supports CDC (Change Data Capture), allowing real-time tracking of data changes from source databases (e.g., MongoDB) and streaming them directly into Kafka before loading to the destination.</li>
+</ul>
+</li>
+<li><code>ElasticSearch</code> &amp; <code>Kibana</code><ul>
+<li>A powerful real-time search and analytics engine optimized for transactional and log data, making it ideal for real-time analysis in a coffee shop.</li>
+<li>Kibana provides intuitive data visualization, allowing users to build real-time dashboards in Elasticsearch without coding.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Batch Pipeline</p>
+<ul>
+<li><code>Airbyte</code><ul>
+<li>A low-code data integration tool that simplifies extracting and loading data across systems.</li>
+<li>Easy to configure connections between various data sources and destinations.</li>
+<li>Automatically applies schema mapping when transferring data from NoSQL (e.g., MongoDB) to SQL (PostgreSQL).</li>
+</ul>
+</li>
+<li><code>PostgreSQL</code> &amp; <code>DBT</code><ul>
+<li>PostgreSQL serves as the data warehouse, providing a structured environment for data transformation and analysis.</li>
+<li>DBT (Data Build Tool) is used for transforming raw data into meaningful insights using SQL-based modeling.</li>
+<li>DBT also supports data quality checks, including not null, unique, and referential integrity constraints to ensure clean and reliable data.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="data-flow">Data Flow</h4>
+<p><img alt="Image" src="img/data-flow.png"></p>
+<h2 id="ii-deployment">II. <a href="overview/">Deployment</a></h2></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.sections", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
