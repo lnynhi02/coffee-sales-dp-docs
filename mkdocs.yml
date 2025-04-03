@@ -1,0 +1,50 @@
+site_name: Coffee Sales Data Pipeline
+site_url: https://lnynhi02.github.io/coffee-sales-dp-docs
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Documentation: index.md
+  - Deployment:
+    - Overview: overview.md
+    - Streaming Pipeline: streaming.md
+    - Batch Pipeline: batch.md
+  - Additional Knowledge:
+    - Kafka Connect versus Kafka Producer and Consumer: kafkaconnect.md
+  - GitHub Repository: https://github.com/lnynhi02/coffee-sales-data-pipeline/
+
+theme:
+  name: material
+
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+  palette: 
+    - scheme: default
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+
+    - scheme: slate
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.tasklist
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+plugins:
+  - mkdocs-video:
+      is_video: True
+      video_muted: True
+      video_controls: True
