@@ -4,9 +4,9 @@
 ### 1. Business Problem (Simulation)
 This project simulates transaction data from a coffee shop. The data used includes:
 
-- `transactions`: Raw transactions data generated for the coffee shop.
+- `transactions`: Raw transaction data generated to simulate real-world coffee shop sales.
 - `product`:The list of products that are currently being sold in the coffee shops.
-- `store`: The different branches or locations of the coffee shop
+- `store`: Represents various branches or locations of the coffee shop.
 - `payment_method`: The payment method used when ordering.
 
 ### 2. Data Source
@@ -140,9 +140,9 @@ Fact tables store transactional data, linking to dimension tables via foreign ke
 The following diagram illustrates the relationship between the dimension and fact tables mentioned above:<br>
 ![Image](img/coffee_dw_diagram.png)
 
-### 6. ELT Design
-#### ELT Diagram
-![Image](img/elt-diagram.png)
+### 6. ETL Design
+#### ETL Diagram
+![Image](img/etl-diagram.png)
 
 #### Task Flow
 1. Streaming Flow
@@ -172,6 +172,8 @@ The following diagram illustrates the relationship between the dimension and fac
          - DBT also supports data quality checks, including not null, unique, and referential integrity constraints to ensure clean and reliable data.
 
 #### Data Flow
+
+- Batch Data Flow: <br>
 ![Image](img/data-flow.png)
 
 ## II. [Deployment](overview.md)

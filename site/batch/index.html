@@ -1,0 +1,991 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lnynhi02.github.io/coffee-sales-dp-docs/batch/">
+      
+      
+        <link rel="prev" href="../streaming/">
+      
+      
+        <link rel="next" href="../kafkaconnect/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>Batch Pipeline - Coffee Sales Data Pipeline</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#batch-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Coffee Sales Data Pipeline" class="md-header__button md-logo" aria-label="Coffee Sales Data Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Coffee Sales Data Pipeline
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Batch Pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Coffee Sales Data Pipeline" class="md-nav__button md-logo" aria-label="Coffee Sales Data Pipeline" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Coffee Sales Data Pipeline
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Deployment
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../streaming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streaming Pipeline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Batch Pipeline
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Batch Pipeline
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup-airbyte-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setup Airbyte connection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dbt-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. DBT Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-batch-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the Batch Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Run the Batch Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution Overview 🎬
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      DBT models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DBT models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Additional Knowledge
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Additional Knowledge
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kafkaconnect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kafka Connect versus Kafka Producer and Consumer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/lnynhi02/coffee-sales-data-pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub Repository
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-setup-airbyte-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Setup Airbyte connection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dbt-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. DBT Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-run-the-batch-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the Batch Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Run the Batch Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Execution Overview 🎬
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbt-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      DBT models
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DBT models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#marts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Marts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="batch-pipeline"><strong><em>⏳ Batch Pipeline</em></strong></h1>
+<h2 id="1-setup-airbyte-connection">1. Setup Airbyte connection</h2>
+<p>You can create an Airbyte account using the link in the <a href="../overview/#local-setup">Prerequisites</a> section.</p>
+<p>Once you’ve created your account, you can set up connections between the source and destination databases (in this case, MongoDB and PostgreSQL). Each database setup has a tutorial alongside the configuration, so you don’t need to worry about that.<br>
+<img alt="Image" src="../img/batch-1.png">
+<img alt="Image" src="../img/batch-2.png">
+<img alt="Image" src="../img/batch-3.png"></p>
+<hr>
+<h2 id="2-dbt-setup">2. DBT Setup</h2>
+<p>We mount all the things related to DBT container in folder <code>dbt_project/</code>. We have our only DBT project <code>coffee_dw</code>. <br>
+Here is a brief overview of the necessary configuration files required to run DBT:</p>
+<ol>
+<li><code>profile.yml</code> <ul>
+<li>This file is used to define the connection configurations for DBT to connect to your database (like PostgreSQL, Snowflake, etc.). It contains important information such as the database credentials, host, schema, and other connection settings.</li>
+<li>Visit this <a href="https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml" target="_blank">link</a> for more details.
+<div class="highlight"><pre><span></span><code><span class="n">coffee_dw</span><span class="p">:</span>
+<span class="n">target</span><span class="p">:</span> <span class="n">postgres</span>
+<span class="n">outputs</span><span class="p">:</span>
+<span class="n">postgres</span><span class="p">:</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="n">postgres</span>
+  <span class="n">host</span><span class="p">:</span> <span class="n">host</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">internal</span>
+  <span class="n">user</span><span class="p">:</span> <span class="n">postgres</span>
+  <span class="n">password</span><span class="p">:</span> <span class="s2">"{{ env_var('POSTGRES_PASSWORD') }}"</span>
+  <span class="n">port</span><span class="p">:</span> <span class="mi">5432</span>
+  <span class="n">dbname</span><span class="p">:</span> <span class="n">coffee_dw</span>
+  <span class="n">schema</span><span class="p">:</span> <span class="n">dbo</span>
+  <span class="n">threads</span><span class="p">:</span> <span class="mi">8</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>dbt_project.yml</code><ul>
+<li>This file is the main configuration file for your DBT project. It defines the project name, version, models, and other settings that guide the execution of DBT commands.</li>
+<li>Visit this <a href="https://docs.getdbt.com/reference/dbt_project.yml" target="_blank">link</a> for more details.</li>
+</ul>
+</li>
+<li>
+<p><code>seeds\</code></p>
+<ul>
+<li>The <code>seeds/</code> folder contains CSV files that can be loaded into the database as tables. These are static data sets that you can use for reference data, small lookup tables, or small sample datasets that don’t change frequently.</li>
+<li>In addition to the <code>CSV file</code>, you can create a corresponding <code>YAML file</code> to configure column types, default values, and other settings for the table being created from the CSV file.</li>
+<li>Visit this <a href="https://docs.getdbt.com/docs/build/seeds" target="_blank">link</a> for more informations about properties or commands.
+<div class="highlight"><pre><span></span><code>id,name,modified_date
+1,Coffee,2025-03-17 13:08:30
+2,Tea,2025-03-17 13:08:30
+3,Yogurt,2025-03-17 13:08:30
+4,Juice,2025-03-17 13:08:30
+5,Cake,2025-03-17 13:08:30
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>version: 2
+
+seeds:
+- name: product_category
+    config:
+    schema: raw
+    column_types:
+        id: integer
+        name: varchar
+        modified_date: timestamp
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><code>models\</code></p>
+<ul>
+<li>The <code>models/</code> folder is where you define your DBT models, which are SQL files that define transformations in your data warehouse. These models are run when you execute the <code>dbt run</code> command and typically produce tables or views in your data warehouse.</li>
+<li>Visit this <a href="https://docs.getdbt.com/docs/build/sql-models" target="_blank">link</a> for more informations about SQL models.</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-run-the-batch-pipeline">3. Run the Batch Pipeline</h2>
+<h3 id="execution-overview">Execution Overview 🎬</h3>
+<p>Before running, here’s a quick demo of the batch pipeline in action:</p>
+<p>📽️</p>
+<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" muted controls alt="type:video"><source src="../videos/batch.mp4" type="video/mp4"></source></video></div></p>
+<h3 id="dbt-models">DBT models</h3>
+<p><img alt="Image" src="../img/batch-4.png"></p>
+<h4 id="staging">Staging</h4>
+<ul>
+<li><code>source_transactions.yml</code> defines the data source from the <code>transactions</code> table in the public schema of the database, which serves as the <code>raw data</code> source for our pipeline.
+<div class="highlight"><pre><span></span><code>version: 2
+
+sources:
+  - name: raw
+    schema: public
+    tables:
+      - name: transactions
+        description: "Coffee sales table"
+        columns:
+          - name: _id
+            tests:
+              - not_null
+              - unique
+</code></pre></div></li>
+</ul>
+<hr>
+<ul>
+<li>
+<p><code>raw data</code> looks like this:
+    </p><div class="highlight"><pre><span></span><code>{
+"_id": "67da8f08fbbecd9533bcd1e3",
+"timestamp": "2025-03-19T16:31:52.161709",
+"store_id": 4,
+"total_amount": 150000,
+"payment_method": 2,
+"currency": "VND",
+"items": [
+    {
+    "product_id": "C05",
+    "name": "Matcha Cheesecake",
+    "category": "Cake",
+    "quantity": 3,
+    "subtotal": 150000
+    }
+]
+}
+</code></pre></div>
+</li>
+<li>
+<p><code>stg_sales.sql</code> cleans and transforms the raw data from transactions into a <code>staging table</code>, which will be further processed in the next steps.<br></p>
+</li>
+<li><code>materialized='incremental'</code>: This ensures that only <code>new data is updated</code> rather than rebuilding the entire table. Visit <a href="https://docs.getdbt.com/docs/build/incremental-models" target="_blank">dbt incremental models</a> for more details.</li>
+<li>The <code>items</code> field is an <code>array</code> in the document. To extract each item as a separate row in PostgreSQL, we use the <code>jsonb_array_elements</code> function. This allows us to break down the array into individual product details, making it easier to query and process each item separately in the transaction.
+<div class="highlight"><pre><span></span><code><span class="p">{{</span> <span class="n">config</span><span class="p">(</span>
+    <span class="n">materialized</span><span class="o">=</span><span class="s1">'incremental'</span><span class="p">,</span>
+    <span class="n">unique_key</span><span class="o">=</span><span class="s1">'sales_id'</span>
+<span class="p">)</span> <span class="p">}}</span>
+
+<span class="n">WITH</span> <span class="n">stg_sales</span> <span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> 
+        <span class="n">_id</span> <span class="n">AS</span> <span class="n">sales_id</span><span class="p">,</span>
+        <span class="n">timestamp</span><span class="p">,</span>
+        <span class="n">store_id</span><span class="p">,</span>
+        <span class="n">payment_method</span><span class="p">,</span>
+        <span class="n">jsonb_array_elements</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="n">AS</span> <span class="n">item</span>
+    <span class="n">FROM</span> <span class="p">{{</span> <span class="n">source</span><span class="p">(</span><span class="s1">'raw'</span><span class="p">,</span> <span class="s1">'transactions'</span><span class="p">)</span> <span class="p">}}</span>
+
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">is_incremental</span><span class="p">()</span> <span class="o">%</span><span class="p">}</span>
+    <span class="n">WHERE</span> <span class="n">timestamp</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">SELECT</span> <span class="n">MAX</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span> <span class="n">FROM</span> <span class="p">{{</span> <span class="n">this</span> <span class="p">}})</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">SELECT</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">sales_id</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">store_id</span><span class="p">::</span><span class="n">INTEGER</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">payment_method</span><span class="p">::</span><span class="n">INTEGER</span> <span class="n">AS</span> <span class="n">payment_method_id</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">item</span><span class="o">-&gt;&gt;</span><span class="s1">'product_id'</span><span class="p">)</span> <span class="n">AS</span> <span class="n">product_id</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">item</span><span class="o">-&gt;&gt;</span><span class="s1">'quantity'</span><span class="p">)::</span><span class="n">INTEGER</span> <span class="n">AS</span> <span class="n">quantity</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">item</span><span class="o">-&gt;&gt;</span><span class="s1">'subtotal'</span><span class="p">)::</span><span class="n">INTEGER</span> <span class="n">AS</span> <span class="n">subtotal</span>
+<span class="n">FROM</span> <span class="n">stg_sales</span>
+</code></pre></div></li>
+</ul>
+<hr>
+<h4 id="marts">Marts</h4>
+<ul>
+<li>In the <code>dimensions/</code> folder, you will have models like <code>dim_product</code>, <code>dim_store</code>, and <code>dim_payment</code>. These models represent <code>dimension tables</code> in the Data Warehouse, storing descriptive <code>attributes</code> of key entities like products, stores, and payment methods. These tables are used to enrich the data for analysis, providing context to the events stored in the fact tables.</li>
+<li>In the <code>fact/</code> folder, you will have models like <code>fact_sales</code>, contains transactional data such as sales, quantity, timestamp, and revenue, which are linked to the corresponding dimensions (product, store, payment method). The sales_key is a unique identifier for each transaction, generated using a combination of surrogate keys for the product, store, and payment method.
+<div class="highlight"><pre><span></span><code><span class="p">{{</span> <span class="n">config</span><span class="p">(</span>
+    <span class="n">materialized</span><span class="o">=</span><span class="s1">'incremental'</span><span class="p">,</span>
+    <span class="n">unique_key</span><span class="o">=</span><span class="s1">'sales_key'</span>
+<span class="p">)</span> <span class="p">}}</span>
+
+<span class="n">WITH</span> <span class="n">stg_sales</span> <span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span> <span class="o">*</span>
+    <span class="n">FROM</span> <span class="p">{{</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'stg_sales'</span><span class="p">)</span> <span class="p">}}</span>
+
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">is_incremental</span><span class="p">()</span> <span class="o">%</span><span class="p">}</span>
+    <span class="n">WHERE</span> <span class="n">timestamp</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">SELECT</span> <span class="n">MAX</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span> <span class="n">FROM</span> <span class="p">{{</span> <span class="n">this</span> <span class="p">}})</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">SELECT</span>
+    <span class="n">MOD</span><span class="p">(</span><span class="n">ABS</span><span class="p">(</span><span class="n">CAST</span><span class="p">(</span><span class="s1">'x'</span> <span class="o">||</span> <span class="n">LEFT</span><span class="p">(</span><span class="n">MD5</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="n">stg_sales</span><span class="o">.</span><span class="n">sales_id</span><span class="p">,</span> <span class="n">stg_sales</span><span class="o">.</span><span class="n">product_id</span><span class="p">)),</span> <span class="mi">15</span><span class="p">)</span> <span class="n">AS</span> <span class="n">BIT</span><span class="p">(</span><span class="mi">64</span><span class="p">))::</span><span class="n">BIGINT</span><span class="p">),</span> <span class="mi">10000000000</span><span class="p">)</span> <span class="n">AS</span> <span class="n">sales_key</span><span class="p">,</span>
+    <span class="p">{{</span> <span class="n">dbt_utils</span><span class="o">.</span><span class="n">generate_surrogate_key</span><span class="p">([</span><span class="s1">'stg_sales.store_id'</span><span class="p">])</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">store_key</span><span class="p">,</span>
+    <span class="p">{{</span> <span class="n">dbt_utils</span><span class="o">.</span><span class="n">generate_surrogate_key</span><span class="p">([</span><span class="s1">'stg_sales.product_id'</span><span class="p">])</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">product_key</span><span class="p">,</span>
+    <span class="p">{{</span> <span class="n">dbt_utils</span><span class="o">.</span><span class="n">generate_surrogate_key</span><span class="p">([</span><span class="s1">'stg_sales.payment_method_id'</span><span class="p">])</span> <span class="p">}}</span> <span class="n">AS</span> <span class="n">payment_method_key</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">sales_id</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span>
+    <span class="n">stg_sales</span><span class="o">.</span><span class="n">subtotal</span> <span class="n">AS</span> <span class="n">revenue</span>
+<span class="n">FROM</span> <span class="n">stg_sales</span>
+</code></pre></div></li>
+</ul>
+<p>All <code>YAML files</code> in the models directory are used for <code>data quality</code> checks and to define <code>relationships</code> between different models. These files help ensure that the data meets the expected standards and integrity constraints, such as non-null values, uniqueness, and correct data types, while also establishing relationships between tables for accurate data modeling.<br>
+</p><div class="highlight"><pre><span></span><code><span class="n">version</span><span class="p">:</span> <span class="mi">2</span>
+
+<span class="n">models</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">fact_sales</span>
+    <span class="n">columns</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">sales_key</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">surrogate</span> <span class="n">key</span> <span class="n">of</span> <span class="n">the</span> <span class="n">sale</span>
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>
+          <span class="o">-</span> <span class="n">unique</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">store_key</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">foreign</span> <span class="n">key</span> <span class="n">of</span> <span class="n">the</span> <span class="n">store</span> 
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>
+          <span class="o">-</span> <span class="n">relationships</span><span class="p">:</span>
+              <span class="n">to</span><span class="p">:</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'dim_store'</span><span class="p">)</span>
+              <span class="n">field</span><span class="p">:</span> <span class="n">store_key</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">product_key</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">foreign</span> <span class="n">key</span> <span class="n">of</span> <span class="n">the</span> <span class="n">product</span>
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>
+          <span class="o">-</span> <span class="n">relationships</span><span class="p">:</span>
+              <span class="n">to</span><span class="p">:</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'dim_product'</span><span class="p">)</span>
+              <span class="n">field</span><span class="p">:</span> <span class="n">product_key</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">payment_method_key</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">foreign</span> <span class="n">key</span> <span class="n">of</span> <span class="n">the</span> <span class="n">payment</span> <span class="n">method</span>
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>
+          <span class="o">-</span> <span class="n">relationships</span><span class="p">:</span>
+              <span class="n">to</span><span class="p">:</span> <span class="n">ref</span><span class="p">(</span><span class="s1">'dim_payment'</span><span class="p">)</span>
+              <span class="n">field</span><span class="p">:</span> <span class="n">payment_method_key</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">sales_id</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">natural</span> <span class="n">key</span> <span class="n">of</span> <span class="n">the</span> <span class="n">sale</span>
+        <span class="n">tests</span><span class="p">:</span> 
+          <span class="o">-</span> <span class="n">not_null</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">timestamp</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">timestamp</span> <span class="n">of</span> <span class="n">the</span> <span class="n">sale</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">quantity</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">quantity</span> <span class="n">of</span> <span class="n">the</span> <span class="n">product</span>
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>
+
+      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">revenue</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">The</span> <span class="n">revenue</span> <span class="n">obtained</span> <span class="n">by</span> <span class="n">multiplying</span> <span class="n">the</span> <span class="n">price</span> <span class="ow">and</span> <span class="n">quantity</span>
+        <span class="n">tests</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">not_null</span>  
+</code></pre></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

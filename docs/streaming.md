@@ -281,4 +281,9 @@ Once executed, the output should look similar to the following:
 ![Image](img/streaming-6.png)
 ![Image](img/streaming-7.png)
 
+And now you can create a dashboard in Kibana to monitor trends in real-time.
+
+![Image](img/streaming-db.png)
+![Image](img/streaming-db1.png)
+
 ---

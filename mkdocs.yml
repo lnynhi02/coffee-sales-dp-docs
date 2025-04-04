@@ -6,12 +6,14 @@ extra_css:
 
 nav:
   - Documentation: index.md
+  - Changelog: changelog.md
   - Deployment:
     - Overview: overview.md
     - Streaming Pipeline: streaming.md
     - Batch Pipeline: batch.md
   - Additional Knowledge:
     - Kafka Connect versus Kafka Producer and Consumer: kafkaconnect.md
+  - References: reference.md
   - GitHub Repository: https://github.com/lnynhi02/coffee-sales-data-pipeline/
 
 theme:

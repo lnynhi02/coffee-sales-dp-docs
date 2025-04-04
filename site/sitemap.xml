@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/batch/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/changelog/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/kafkaconnect/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/overview/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/reference/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+    <url>
+         <loc>https://lnynhi02.github.io/coffee-sales-dp-docs/streaming/</loc>
+         <lastmod>2025-04-04</lastmod>
+    </url>
+</urlset>
