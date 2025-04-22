@@ -157,6 +157,8 @@ The following diagram illustrates the relationship between the dimension and fac
       - `KafkaConnect`
          - Enables seamless data integration between systems without requiring custom code—just create a JSON configuration file.
          - Supports CDC (Change Data Capture), allowing real-time tracking of data changes from source databases (e.g., MongoDB) and streaming them directly into Kafka before loading to the destination.
+      - `MongoDB`
+         - Suitable for handling semi-structured and unstructured data, offers high write performance, and is scalable for future data pipeline expansion.
       - `ElasticSearch` & `Kibana`
          - A powerful real-time search and analytics engine optimized for transactional and log data, making it ideal for real-time analysis in a coffee shop.
          - Kibana provides intuitive data visualization, allowing users to build real-time dashboards in Elasticsearch without coding.

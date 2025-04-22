@@ -1,4 +1,8 @@
 # ***⏳ Batch Pipeline***
+
+!!! Note
+    Using <a href="https://ngrok.com/" target="_blank">ngrok</a> to create a tunnel, allowing external connections to PostgreSQL on a local machine.
+
 ## 1. Setup Airbyte connection
 You can create an Airbyte account using the link in the [Prerequisites](overview.md#local-setup) section.
 
