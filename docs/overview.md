@@ -1,7 +1,5 @@
 # ***COFFEE SALES HYBRID DATA PIPELINE***
     
-## **Overview**
----
 ![Image](img/data-pipeline.png)
 
 ## **📕 Table Of Contents**
