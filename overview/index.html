@@ -57,7 +57,16 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -76,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coffee-sales-hybrid-data-pipeline" class="md-skip">
+        <a href="#coffee-sales-data-pipeline" class="md-skip">
           Skip to content
         </a>
       
@@ -215,6 +224,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../evolution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Evolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         
   
@@ -250,10 +280,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -265,8 +295,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Deployment
           </label>
@@ -461,78 +491,6 @@
   
   
   
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
-    Additional Knowledge
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Additional Knowledge
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../kafkaconnect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Kafka Connect versus Kafka Producer and Consumer
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../reference/" class="md-nav__link">
         
@@ -680,8 +638,8 @@
 
 
 
-<div><h1 id="coffee-sales-hybrid-data-pipeline"><strong><em>COFFEE SALES HYBRID DATA PIPELINE</em></strong></h1>
-<p><img alt="Image" src="../img/data-pipeline.png"></p>
+<div><h1 id="coffee-sales-data-pipeline"><strong><em>COFFEE SALES DATA PIPELINE</em></strong></h1>
+<p><a class="glightbox" href="../img/data-pipeline-v1.1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="../img/data-pipeline-v1.1.png"></a></p>
 <h2 id="table-of-contents"><strong>📕 Table Of Contents</strong></h2>
 <ul>
 <li><a href="#local-setup">⚙️ Local Setup</a></li>
@@ -695,37 +653,68 @@
 <ul>
 <li><p>Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker</a>.</p></li>
 <li><p>Install <a href="https://www.python.org/" target="_blank">Python</a>.</p></li>
-<li><p>Install <a href="https://www.postgresql.org/download/" target="_blank">PostgreSQL</a>.</p></li>
-<li><p>Install <a href="https://www.mongodb.com/docs/manual/administration/install-community/" target="_blank">self-hosted MongoDB</a> or <a href="https://www.mongodb.com/atlas" target="_blank">MongoDB in Cloud</a>.</p></li>
-<li><p>Create an <a href="https://www.cloud.airbyte.com/" target="_blank">Airbyte account</a>.</p></li>
-<li>Clone, fork, or download this GitHub repository on your local machine using the following command:
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lnynhi02/coffee-sales-data-pipeline.git
-</code></pre></div></li>
+<li>
+<p></p><p>Install <a href="https://dev.mysql.com/downloads/" target="_blank">MySQL</a>.</p>
+</li>
+<li>
+<p>Clone, fork, or download this GitHub repository on your local machine using the following command:
+</p><div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lnynhi02/coffee-sales-data-pipeline.git
+</code></pre></div>
+</li>
 </ul>
 <h3 id="2-project-structure">2. Project Structure</h3>
-<div class="highlight"><pre><span></span><code>coffee-sales-data-pipeline/
-├── connectors/                  # Kafka Connect configuration files
-│   ├── elasticsearch-sink-connector.json  # Sink connector for Elasticsearch
-│   ├── generate-mongo-connector.py        # Script to create MongoDB source connector
-├── dbt-project/                 # DBT project for data transformation
-│   ├── coffee_dw/               # Data warehouse managed by DBT
-│   │   ├── seeds/               # Static seed data
-│   │   │   ├── payment_method/  # Payment method details (CSV, schema)
-│   │   │   ├── product/         # Product details &amp; categories (CSV, schema)
-│   │   │   ├── store/           # Store details (CSV, schema)
-│   │   ├── models/              # DBT models
-│   │   │   ├── staging/         # Load raw data from PostgreSQL
-│   │   │   ├── marts/           # Transformed data models
-│   │   │   │   ├── dimensions/  # Product, store, payment_method
-│   │   │   │   ├── facts/       # Sales data
-│   ├── dbt_project.yml          # DBT project config
-│   ├── packages.yml             # DBT dependencies
-│   ├── profiles.yml             # DBT database connection config
-├── scripts/
-│   └── mongodb_data.py           # Streams data to MongoDB
-├── docker-compose.yml            # Docker Compose for service orchestration
-├── config.ini                    # MongoDB connection details
-└── run-pipeline.ps1              # Script to run the pipeline
+<div class="highlight"><pre><span></span><code>coffee_sales_project/
+├── airflow/                              # Airflow configuration and orchestration
+│   ├── dags/
+│   │   └── spark_job_airflow/            # Airflow DAGs to trigger Spark jobs
+│   └── Dockerfile                        # Dockerfile to build custom Airflow image
+│
+├── data/                                 # Static CSV files to preload into MySQL
+│   ├── diamond_customers.csv
+│   ├── payment_method.csv
+│   ├── product_category.csv
+│   ├── products.csv
+│   └── stores.csv
+│
+├── logs/                                  # Logs for different pipeline components
+│   ├── batch.log
+│   ├── real-time.log
+│   └── data_validation.log
+│
+├── scripts/                              
+│   ├── database/                          # Scripts related to database setup and load
+│   │   ├── create_table.py 
+│   │   ├── generate_data.py
+│   │   ├── load_static_file.py            # Load static CSV files into MySQL
+│   │   └── lookup_data_cache.py
+│   ├── update_order_status.py
+│
+│   ├── batch/                             # Batch processing scripts (Lakehouse architecture)
+│   │   ├── bronze_dimension_fact_load.py
+│   │   ├── silver_dimensions.py
+│   │   ├── silver_facts.py  
+│   │   ├── gold_dim_payment.py
+│   │   ├── gold_dim_products.py
+│   │   ├── gold_dim_stores.py 
+│   │   ├── gold_fact_orders.py
+│   │   ├── utils.py                       # Shared utility functions for batch jobs
+│   │
+│   │   └── data_quality/                  # Data validation and quality check scripts
+│   │       ├── bronze_validation.py
+│   │       └── silver_validation.py
+│
+│   └── real-time/                         # Real-time pipeline logic
+│       ├── kafka_handler.py               # Kafka Handle Class
+│       ├── kafka_client.py                # Handle Kafka messages for suggestion logic
+│       └── mysql-src-connector.json       # Kafka Connect source connector config for MySQL
+│
+├── volumes/                               # Volume mount point for Docker (e.g., persistent storage)
+│
+├── .env                                   # Environment variables (MySQL config, SMTP, etc.)
+├── docker-compose.yaml                    # Docker Compose file (real-time)
+├── docker-compose-batch.yaml              # Additional Compose file (for batch processing setup)
+├── mysql-connector.jar                    # MySQL JDBC connector for Spark
+└── real-time.ps1                          # Windows PowerShell script to start real-time processes
 </code></pre></div>
 <hr>
 <ol>
@@ -742,7 +731,7 @@
 </ul>
 </li>
 <li>Install the necessary package:
-   <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pymongo
+   <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirement.txt
 </code></pre></div></li>
 </ol>
 <hr>
@@ -751,7 +740,9 @@
 <h2 id="batch-pipeline"><strong>⏳ Batch Pipeline</strong></h2>
 <p>Visit <a href="../batch/">this</a> for more details.</p>
 <h2 id="documentation"><strong>📝 Documentation</strong></h2>
-<p>Visit <a href="../">this</a> for more details.</p></div>
+<p>Visit <a href="../">this</a> for more details.</p>
+<hr>
+<p>Feel free to reach out or message me if you have any questions!</p></div>
 
 
 
@@ -810,5 +801,7 @@
       <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

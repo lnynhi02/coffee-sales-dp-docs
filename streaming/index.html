@@ -57,7 +57,16 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -215,6 +224,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../evolution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Evolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../changelog/" class="md-nav__link">
         
   
@@ -250,10 +280,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -265,8 +295,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Deployment
           </label>
@@ -349,22 +379,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-configure-mongodb-connection" class="md-nav__link">
+  <a href="#1-configure-mysql-connection" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Configure MongoDB connection
+      1. Configure MySQL connection
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-setup-kafka-connect" class="md-nav__link">
+  <a href="#2-setup-kafka" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Setup Kafka Connect
+      2. Setup Kafka
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Setup Kafka Connect">
+    <nav class="md-nav" aria-label="2. Setup Kafka">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -386,15 +416,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kafka-ui-for-monitoring" class="md-nav__link">
-    <span class="md-ellipsis">
-      Kafka UI for Monitoring
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#kafka-connect-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Kafka Connect Configuration
@@ -409,22 +430,31 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-elasticsearch-and-kibana" class="md-nav__link">
+  <a href="#3-redis" class="md-nav__link">
     <span class="md-ellipsis">
-      3. ElasticSearch and Kibana
+      3. Redis
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-run-the-streaming-script" class="md-nav__link">
+  <a href="#4-prometheus-and-grafana" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Run the Streaming script
+      4. Prometheus and Grafana
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Run the Streaming script">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-run-the-streaming-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Run the Streaming script
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Run the Streaming script">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -437,9 +467,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-pipeline-script" class="md-nav__link">
+  <a href="#run-the-real-time-pipeline-powershell-script" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the Pipeline Script
+      Run the Real-time Pipeline Powershell Script
     </span>
   </a>
   
@@ -471,78 +501,6 @@
   
   <span class="md-ellipsis">
     Batch Pipeline
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
-    Additional Knowledge
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Additional Knowledge
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../kafkaconnect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Kafka Connect versus Kafka Producer and Consumer
     
   </span>
   
@@ -629,22 +587,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-configure-mongodb-connection" class="md-nav__link">
+  <a href="#1-configure-mysql-connection" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Configure MongoDB connection
+      1. Configure MySQL connection
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-setup-kafka-connect" class="md-nav__link">
+  <a href="#2-setup-kafka" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Setup Kafka Connect
+      2. Setup Kafka
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Setup Kafka Connect">
+    <nav class="md-nav" aria-label="2. Setup Kafka">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -666,15 +624,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#kafka-ui-for-monitoring" class="md-nav__link">
-    <span class="md-ellipsis">
-      Kafka UI for Monitoring
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#kafka-connect-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       Kafka Connect Configuration
@@ -689,22 +638,31 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-elasticsearch-and-kibana" class="md-nav__link">
+  <a href="#3-redis" class="md-nav__link">
     <span class="md-ellipsis">
-      3. ElasticSearch and Kibana
+      3. Redis
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-run-the-streaming-script" class="md-nav__link">
+  <a href="#4-prometheus-and-grafana" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Run the Streaming script
+      4. Prometheus and Grafana
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Run the Streaming script">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-run-the-streaming-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Run the Streaming script
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Run the Streaming script">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -717,9 +675,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-pipeline-script" class="md-nav__link">
+  <a href="#run-the-real-time-pipeline-powershell-script" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the Pipeline Script
+      Run the Real-time Pipeline Powershell Script
     </span>
   </a>
   
@@ -747,105 +705,108 @@
 
 
 <div><h1 id="streaming-pipeline"><strong><em>⚡ Streaming Pipeline</em></strong></h1>
-<p><img alt="Image" src="../img/streaming.png">
-<br></p>
-<h2 id="1-configure-mongodb-connection">1. Configure MongoDB connection</h2>
+<h2 id="1-configure-mysql-connection">1. Configure MySQL connection</h2>
 <p>You need to complete the setup in the <a href="../overview/#local-setup">Prerequisites</a> section before proceeding.</p>
-<p>Set up your <code>config.ini</code> file with the necessary credentials to connect to your MongoDB database:
-</p><div class="highlight"><pre><span></span><code><span class="n">config</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
-<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">"config.ini"</span><span class="p">)</span>
-
-<span class="c1"># Connect to MongoDB</span>
-<span class="n">username</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"username"</span><span class="p">]</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"password"</span><span class="p">]</span>
-<span class="n">cluster</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"cluster"</span><span class="p">]</span>
-<span class="n">database</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"database"</span><span class="p">]</span>
-
-<span class="n">uri</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"mongodb+srv://</span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">cluster</span><span class="si">}</span><span class="s2">"</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
-<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">database</span><span class="p">]</span>
+<p>Set up your <code>.env</code> file with the necessary credentials to connect to your MySQL database:
+</p><div class="highlight"><pre><span></span><code><span class="n">MSQL_HOST</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<span class="n">MSQL_USER</span><span class="o">=</span><span class="n">root</span>
+<span class="n">MSQL_PASSWORD</span><span class="o">=</span><span class="n">yourpassword</span>
+<span class="n">MSQL_DATABASE</span><span class="o">=</span><span class="n">coffee_shop</span>
 </code></pre></div>
-<h2 id="2-setup-kafka-connect">2. Setup Kafka Connect</h2>
+<h2 id="2-setup-kafka">2. Setup Kafka</h2>
 <p>To set up Kafka Connect, we first need to configure the Kafka Broker and Kafka UI as follows:</p>
 <h3 id="kafka-broker">Kafka Broker</h3>
-<p>All Kafka container-related data will be stored in <code>docker_volumes/kafka</code>
-</p><div class="highlight"><pre><span></span><code><span class="n">kafka</span><span class="p">:</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">kafka</span>
-    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:latest'</span>
-    <span class="n">user</span><span class="p">:</span> <span class="n">root</span>
+<p>Two Kafka brokers are configured with data stored in <code>volumes/kafka-1</code> and <code>volumes/kafka-2</code>. You can scale up (e.g., 3 brokers) if more resources are available.</p>
+<p>Since <code>Prometheus</code> and <code>Grafana</code> are used for monitoring, JMX is also configured for each Kafka broker to export metrics.
+</p><div class="highlight"><pre><span></span><code>  <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:3.5.1'</span>
     <span class="n">ports</span><span class="p">:</span>
-      <span class="o">-</span> <span class="s1">'9094:9094'</span>
+      <span class="o">-</span> <span class="s1">'29092:29092'</span>
     <span class="n">networks</span><span class="p">:</span>
       <span class="o">-</span> <span class="n">myNetwork</span>
     <span class="n">environment</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">KAFKA_CFG_NODE_ID</span><span class="o">=</span><span class="mi">0</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_NODE_ID</span><span class="o">=</span><span class="mi">1</span>
       <span class="o">-</span> <span class="n">KAFKA_CFG_PROCESS_ROLES</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span><span class="n">broker</span>
-      <span class="o">-</span> <span class="n">KAFKA_CFG_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">CONTROLLER</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9093</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9094</span>
-      <span class="o">-</span> <span class="n">KAFKA_CFG_ADVERTISED_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9094</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">CONTROLLER</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9093</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">29092</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_ADVERTISED_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">29092</span>
       <span class="o">-</span> <span class="n">KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="o">=</span><span class="n">CONTROLLER</span><span class="p">:</span><span class="n">PLAINTEXT</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="n">PLAINTEXT</span><span class="p">,</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="n">PLAINTEXT</span>
-      <span class="o">-</span> <span class="n">KAFKA_CFG_CONTROLLER_QUORUM_VOTERS</span><span class="o">=</span><span class="mi">0</span><span class="nd">@kafka</span><span class="p">:</span><span class="mi">9093</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_CONTROLLER_QUORUM_VOTERS</span><span class="o">=</span><span class="mi">1</span><span class="nd">@kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9093</span><span class="p">,</span><span class="mi">2</span><span class="nd">@kafka</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">9093</span>
       <span class="o">-</span> <span class="n">KAFKA_CFG_CONTROLLER_LISTENER_NAMES</span><span class="o">=</span><span class="n">CONTROLLER</span>
       <span class="o">-</span> <span class="n">KAFKA_AUTO_CREATE_TOPICS_ENABLE</span><span class="o">=</span><span class="n">true</span>
+      <span class="o">-</span> <span class="n">KAFKA_KRAFT_CLUSTER_ID</span><span class="o">=</span><span class="n">k3Fk2HhXQwWL9rPlYxYOoA</span>
+      <span class="o">-</span> <span class="n">KAFKA_OPTS</span><span class="o">=-</span><span class="n">javaagent</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">jmx_prometheus_javaagent</span><span class="o">-</span><span class="mf">0.20.0</span><span class="o">.</span><span class="n">jar</span><span class="o">=</span><span class="mi">9300</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">broker</span><span class="o">.</span><span class="n">yml</span>
     <span class="n">volumes</span><span class="p">:</span>
-      <span class="o">-</span> <span class="o">./</span><span class="n">docker_volumes</span><span class="o">/</span><span class="n">kafka</span><span class="p">:</span><span class="o">/</span><span class="n">bitnami</span><span class="o">/</span><span class="n">kafka</span><span class="p">:</span><span class="n">rw</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">/</span><span class="n">bitnami</span><span class="o">/</span><span class="n">kafka</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span>
+
+  <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
+    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:3.5.1'</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">"29093:29093"</span>
+    <span class="n">environment</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_NODE_ID</span><span class="o">=</span><span class="mi">2</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_PROCESS_ROLES</span><span class="o">=</span><span class="n">controller</span><span class="p">,</span><span class="n">broker</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">CONTROLLER</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">9093</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="p">:</span><span class="mi">29093</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_ADVERTISED_LISTENERS</span><span class="o">=</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="n">kafka</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">9092</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">29093</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP</span><span class="o">=</span><span class="n">CONTROLLER</span><span class="p">:</span><span class="n">PLAINTEXT</span><span class="p">,</span><span class="n">EXTERNAL</span><span class="p">:</span><span class="n">PLAINTEXT</span><span class="p">,</span><span class="n">PLAINTEXT</span><span class="p">:</span><span class="n">PLAINTEXT</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_CONTROLLER_QUORUM_VOTERS</span><span class="o">=</span><span class="mi">1</span><span class="nd">@kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9093</span><span class="p">,</span><span class="mi">2</span><span class="nd">@kafka</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mi">9093</span>
+      <span class="o">-</span> <span class="n">KAFKA_CFG_CONTROLLER_LISTENER_NAMES</span><span class="o">=</span><span class="n">CONTROLLER</span>
+      <span class="o">-</span> <span class="n">KAFKA_AUTO_CREATE_TOPICS_ENABLE</span><span class="o">=</span><span class="n">true</span>
+      <span class="o">-</span> <span class="n">KAFKA_KRAFT_CLUSTER_ID</span><span class="o">=</span><span class="n">k3Fk2HhXQwWL9rPlYxYOoA</span>
+      <span class="o">-</span> <span class="n">KAFKA_OPTS</span><span class="o">=-</span><span class="n">javaagent</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">jmx_prometheus_javaagent</span><span class="o">-</span><span class="mf">0.20.0</span><span class="o">.</span><span class="n">jar</span><span class="o">=</span><span class="mi">9300</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">broker</span><span class="o">.</span><span class="n">yml</span>
+    <span class="n">volumes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">/</span><span class="n">bitnami</span><span class="o">/</span><span class="n">kafka</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span>
+    <span class="n">networks</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">myNetwork</span>
 </code></pre></div>
 <hr>
 <h3 id="create-required-topics-for-kafka-connect">Create Required Topics for Kafka Connect</h3>
 <p>Kafka Connect requires three topics: <code>connect-configs</code>, <code>connect-offsets</code>, and <code>connect-status</code>.
 These topics must be created before starting Kafka Connect, otherwise, the connector will fail to start.</p>
+<p>Additionally, we also pre-create the topic <code>mysql.coffee-shop.order_details</code>, which is the destination topic where Kafka Connect pushes CDC (Change Data Capture) events from the <code>order_details</code> table in MySQL.</p>
 <p>To ensure that the topics are created properly, we set up an <code>init-kafka</code> container. This container will wait until <strong>Kafka is fully ready</strong> before creating the required topics.
 </p><div class="highlight"><pre><span></span><code>  <span class="n">init</span><span class="o">-</span><span class="n">kafka</span><span class="p">:</span>
-    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:latest'</span>
+    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:3.5.1'</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">init</span><span class="o">-</span><span class="n">kafka</span>
     <span class="n">depends_on</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">kafka</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
     <span class="n">networks</span><span class="p">:</span>
       <span class="o">-</span> <span class="n">myNetwork</span>
     <span class="n">entrypoint</span><span class="p">:</span> <span class="p">[</span><span class="s2">"/bin/bash"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">]</span>
     <span class="n">command</span><span class="p">:</span> 
       <span class="o">-</span> <span class="o">|</span>
         <span class="n">echo</span> <span class="s2">"Waiting for Kafka to be ready..."</span>
-        <span class="k">while</span> <span class="err">!</span> <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span><span class="p">;</span> <span class="n">do</span>
+        <span class="k">while</span> <span class="err">!</span> <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span><span class="p">;</span> <span class="n">do</span>
           <span class="n">sleep</span> <span class="mi">5</span>
         <span class="n">done</span>
 
         <span class="n">echo</span> <span class="s2">"🚀 Kafka is ready. Creating topics ...... 🚀"</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">configs</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">offsets</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">status</span>
+        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">configs</span>
+        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">10</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">offsets</span>
+        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">5</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">status</span>
+        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">5</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">topic</span> <span class="n">mysql</span><span class="o">.</span><span class="n">coffee_shop</span><span class="o">.</span><span class="n">order_details</span>
 
         <span class="n">echo</span> <span class="s1">'🚀 Topic created successfully! 🚀'</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span>
-</code></pre></div>
-<hr>
-<h3 id="kafka-ui-for-monitoring">Kafka UI for Monitoring</h3>
-<p>To easily monitor Kafka topics and messages, we set up Kafka UI.
-</p><div class="highlight"><pre><span></span><code>  <span class="n">kafka</span><span class="o">-</span><span class="n">ui</span><span class="p">:</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">kafka</span><span class="o">-</span><span class="n">ui</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">image</span><span class="p">:</span> <span class="n">provectuslabs</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">ui</span><span class="p">:</span><span class="n">latest</span>
-    <span class="n">ports</span><span class="p">:</span>
-      <span class="o">-</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8080</span>
-    <span class="n">depends_on</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">kafka</span>
-    <span class="n">networks</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">myNetwork</span>
-    <span class="n">environment</span><span class="p">:</span>
-      <span class="n">KAFKA_CLUSTERS_0_NAME</span><span class="p">:</span> <span class="n">local</span>
-      <span class="n">KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS</span><span class="p">:</span> <span class="n">PLAINTEXT</span><span class="p">:</span><span class="o">//</span><span class="n">kafka</span><span class="p">:</span><span class="mi">9092</span>
-      <span class="n">DYNAMIC_CONFIG_ENABLED</span><span class="p">:</span> <span class="s1">'true'</span>
+        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span>
 </code></pre></div>
 <hr>
 <h3 id="kafka-connect-configuration">Kafka Connect Configuration</h3>
 <p>Finally, we configure Kafka Connect. The <code>commands</code> section downloads the required MongoDB and Elasticsearch connector plugins.
-</p><div class="highlight"><pre><span></span><code><span class="n">connect</span><span class="p">:</span>
+</p><div class="highlight"><pre><span></span><code>  <span class="n">connect</span><span class="p">:</span>
     <span class="n">image</span><span class="p">:</span> <span class="n">confluentinc</span><span class="o">/</span><span class="n">cp</span><span class="o">-</span><span class="n">kafka</span><span class="o">-</span><span class="n">connect</span><span class="p">:</span><span class="n">latest</span>
     <span class="n">hostname</span><span class="p">:</span> <span class="n">connect</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">connect</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">kafka</span><span class="o">-</span><span class="n">connect</span>
     <span class="n">depends_on</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">kafka</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
     <span class="n">ports</span><span class="p">:</span>
       <span class="o">-</span> <span class="s2">"8083:8083"</span>
     <span class="n">environment</span><span class="p">:</span>
-      <span class="n">CONNECT_BOOTSTRAP_SERVERS</span><span class="p">:</span> <span class="s2">"kafka:9092"</span>
+      <span class="n">CONNECT_BOOTSTRAP_SERVERS</span><span class="p">:</span> <span class="s2">"kafka-1:9092,kafka-2:9092"</span>
       <span class="n">CONNECT_REST_ADVERTISED_HOST_NAME</span><span class="p">:</span> <span class="s2">"connect"</span>
       <span class="n">CONNECT_GROUP_ID</span><span class="p">:</span> <span class="s2">"connect-cluster"</span>
       <span class="n">CONNECT_CONFIG_STORAGE_TOPIC</span><span class="p">:</span> <span class="s2">"connect-configs"</span>
@@ -854,159 +815,210 @@ These topics must be created before starting Kafka Connect, otherwise, the conne
       <span class="n">CONNECT_KEY_CONVERTER</span><span class="p">:</span> <span class="s2">"org.apache.kafka.connect.json.JsonConverter"</span>
       <span class="n">CONNECT_VALUE_CONVERTER</span><span class="p">:</span> <span class="s2">"org.apache.kafka.connect.json.JsonConverter"</span>
       <span class="n">CONNECT_PLUGIN_PATH</span><span class="p">:</span> <span class="s2">"/usr/share/confluent-hub-components"</span>
-    <span class="n">volumes</span><span class="p">:</span>
-      <span class="o">-</span> <span class="o">./</span><span class="n">docker_volumes</span><span class="o">/</span><span class="n">kafka_connect</span><span class="p">:</span><span class="o">/</span><span class="n">data</span>
-    <span class="n">networks</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">myNetwork</span>
+      <span class="n">KAFKA_JMX_OPTS</span><span class="p">:</span> <span class="o">-</span><span class="n">javaagent</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">jmx_prometheus_javaagent</span><span class="o">-</span><span class="mf">0.20.0</span><span class="o">.</span><span class="n">jar</span><span class="o">=</span><span class="mi">9300</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">connect</span><span class="o">.</span><span class="n">yml</span>
     <span class="n">command</span><span class="p">:</span>
       <span class="o">-</span> <span class="n">bash</span>
       <span class="o">-</span> <span class="o">-</span><span class="n">c</span>
       <span class="o">-</span> <span class="o">|</span>
-        <span class="n">confluent</span><span class="o">-</span><span class="n">hub</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">prompt</span> <span class="n">mongodb</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">connect</span><span class="o">-</span><span class="n">mongodb</span><span class="p">:</span><span class="n">latest</span>
-        <span class="n">confluent</span><span class="o">-</span><span class="n">hub</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">prompt</span> <span class="n">confluentinc</span><span class="o">/</span><span class="n">kafka</span><span class="o">-</span><span class="n">connect</span><span class="o">-</span><span class="n">elasticsearch</span><span class="p">:</span><span class="n">latest</span>
-        <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">confluent</span><span class="o">/</span><span class="n">docker</span><span class="o">/</span><span class="n">run</span>
-</code></pre></div>
-<hr>
-<h2 id="3-elasticsearch-and-kibana">3. ElasticSearch and Kibana</h2>
-<p>To ensure that data persists even after restarting the container, we mount the <code>docker-volumes/elasticsearch_data</code> folder as a volume for Elasticsearch.
-</p><div class="highlight"><pre><span></span><code>  <span class="n">elasticsearch</span><span class="p">:</span>
-    <span class="n">image</span><span class="p">:</span> <span class="n">docker</span><span class="o">.</span><span class="n">elastic</span><span class="o">.</span><span class="n">co</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">/</span><span class="n">elasticsearch</span><span class="p">:</span><span class="mf">8.5.0</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">elasticsearch</span>
-    <span class="n">ports</span><span class="p">:</span>
-      <span class="o">-</span> <span class="s2">"9200:9200"</span>
-    <span class="n">environment</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">discovery</span><span class="o">.</span><span class="n">type</span><span class="o">=</span><span class="n">single</span><span class="o">-</span><span class="n">node</span>
-      <span class="o">-</span> <span class="n">xpack</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">enabled</span><span class="o">=</span><span class="n">false</span>
+          <span class="k">if</span> <span class="p">[</span> <span class="err">!</span> <span class="o">-</span><span class="n">d</span> <span class="s2">"/usr/share/confluent-hub-components/debezium-debezium-connector-mysql"</span> <span class="p">];</span> <span class="n">then</span>
+            <span class="n">confluent</span><span class="o">-</span><span class="n">hub</span> <span class="n">install</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">prompt</span> <span class="n">debezium</span><span class="o">/</span><span class="n">debezium</span><span class="o">-</span><span class="n">connector</span><span class="o">-</span><span class="n">mysql</span><span class="p">:</span><span class="n">latest</span>
+          <span class="n">fi</span>
+          <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">confluent</span><span class="o">/</span><span class="n">docker</span><span class="o">/</span><span class="n">run</span>
     <span class="n">volumes</span><span class="p">:</span>
-      <span class="o">-</span> <span class="o">./</span><span class="n">docker_volumes</span><span class="o">/</span><span class="n">elasticsearch_data</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">/</span><span class="n">data</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">jmx</span><span class="o">-</span><span class="n">exporter</span><span class="o">/</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">connector</span><span class="o">-</span><span class="n">plugins</span><span class="p">:</span><span class="o">/</span><span class="n">plugins</span>
+    <span class="n">restart</span><span class="p">:</span> <span class="n">always</span>
     <span class="n">networks</span><span class="p">:</span>
       <span class="o">-</span> <span class="n">myNetwork</span>
 </code></pre></div>
 <hr>
-<p>Kibana is configured to connect to Elasticsearch via the <code>ELASTICSEARCH_HOSTS</code> environment variable:
-</p><div class="highlight"><pre><span></span><code>  <span class="n">kibana</span><span class="p">:</span>
-    <span class="n">image</span><span class="p">:</span> <span class="n">docker</span><span class="o">.</span><span class="n">elastic</span><span class="o">.</span><span class="n">co</span><span class="o">/</span><span class="n">kibana</span><span class="o">/</span><span class="n">kibana</span><span class="p">:</span><span class="mf">8.5.0</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">kibana</span>
-    <span class="n">environment</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">ELASTICSEARCH_HOSTS</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">elasticsearch</span><span class="p">:</span><span class="mi">9200</span>
+<h2 id="3-redis">3. Redis</h2>
+<p>Since real-time business logic is implemented (visit <a href="../#real-time-processing-product-suggestion-logic">here</a> for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
+</p><div class="highlight"><pre><span></span><code>  <span class="n">redis</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">redis</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="n">stack</span><span class="p">:</span><span class="n">latest</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">redis</span>
     <span class="n">ports</span><span class="p">:</span>
-      <span class="o">-</span> <span class="s2">"5601:5601"</span>
+      <span class="o">-</span> <span class="s2">"6379:6379"</span>
+      <span class="o">-</span> <span class="s2">"8001:8001"</span>
+    <span class="n">volumes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">redis</span><span class="p">:</span><span class="o">/</span><span class="n">data</span>
     <span class="n">depends_on</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">elasticsearch</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span> 
     <span class="n">networks</span><span class="p">:</span>
       <span class="o">-</span> <span class="n">myNetwork</span>
+</code></pre></div>
+<hr>
+<h2 id="4-prometheus-and-grafana">4. Prometheus and Grafana</h2>
+<p>Prometheus and Grafana are used to monitor Kafka, gather Kafka metrics, and trigger alerts when errors occur.</p>
+<p>You must configure the following environment variables in the <code>.env</code> file to enable email alerts in Grafana:</p>
+<div class="highlight"><pre><span></span><code>SMTP_USER=your_email@example.com
+SMTP_PASSWORD=your_email_app_password
+SMTP_FROM_ADDRESS=alert_sender@example.com
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The value of <code>ELASTICSEARCH_HOSTS</code> must match the <strong>container name of the Elasticsearch service</strong>.
-  In this setup, our Elasticsearch container is named <code>elasticsearch</code>, so Kibana should use <code>http://elasticsearch:9200</code>.
-  If the container name is changed, <code>ELASTICSEARCH_HOSTS</code> must be updated accordingly.</p>
+<p>This is an <strong>app password</strong>, not your Gmail account password.
+Visit <a href="https://support.google.com/mail/answer/185833?hl=en" target="_blank">this guide</a> for more details.</p>
 </div>
-<hr>
-<h2 id="4-run-the-streaming-script">4. Run the Streaming script</h2>
-<p>Now we can start the necessary containers and begin streaming data to MongoDB and Elasticsearch using the following command:
-</p><div class="highlight"><pre><span></span><code>docker-compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>
+<div class="highlight"><pre><span></span><code>  <span class="n">prometheus</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">prom</span><span class="o">/</span><span class="n">prometheus</span><span class="p">:</span><span class="n">v2</span><span class="mf">.50.0</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">prometheus</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">"9090:9090"</span>
+    <span class="n">volumes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">monitoring</span><span class="o">/</span><span class="n">prometheus</span><span class="o">.</span><span class="n">yml</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">prometheus</span><span class="o">/</span><span class="n">prometheus</span><span class="o">.</span><span class="n">yml</span>
+    <span class="n">networks</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">myNetwork</span>
+
+  <span class="n">grafana</span><span class="p">:</span>
+    <span class="n">image</span><span class="p">:</span> <span class="n">grafana</span><span class="o">/</span><span class="n">grafana</span><span class="p">:</span><span class="n">latest</span>
+    <span class="n">container_name</span><span class="p">:</span> <span class="n">grafana</span>
+    <span class="n">ports</span><span class="p">:</span>
+      <span class="o">-</span> <span class="s2">"3000:3000"</span>
+    <span class="n">environment</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_ENABLED</span><span class="o">=</span><span class="n">true</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_HOST</span><span class="o">=</span><span class="n">smtp</span><span class="o">.</span><span class="n">gmail</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">587</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_USER</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">SMTP_USER</span><span class="p">}</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_PASSWORD</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">SMTP_PASSWORD</span><span class="p">}</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_FROM_ADDRESS</span><span class="o">=</span><span class="err">$</span><span class="p">{</span><span class="n">SMTP_FROM_ADDRESS</span><span class="p">}</span>
+      <span class="o">-</span> <span class="n">GF_SMTP_FROM_NAME</span><span class="o">=</span><span class="n">Grafana</span> <span class="n">Alerts</span>
+    <span class="n">volumes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">data</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">grafana</span>
+      <span class="o">-</span> <span class="o">./</span><span class="n">volumes</span><span class="o">/</span><span class="n">monitoring</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">grafana</span><span class="o">/</span><span class="n">provisioning</span>
+    <span class="n">depends_on</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">prometheus</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
+    <span class="n">networks</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">myNetwork</span>
 </code></pre></div>
-<br>
-<h4 id="execution-overview">Execution Overview 🎬</h4>
-<p>Before setting up the environment, here’s a quick demo of the streaming pipeline in action:</p>
-<p>📽️</p>
-<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" muted controls alt="type:video"><source src="../videos/streaming.mp4" type="video/mp4"></source></video></div></p>
 <hr>
-<h3 id="run-the-pipeline-script">Run the Pipeline Script</h3>
-<p>Instead of running multiple commands manually, we have a PowerShell script <code>run_pipeline.ps1</code> that automates the entire process, including:</p>
-<p>✔️ Generating connector configuration</p>
-<p>✔️ Registering Kafka Connectors</p>
-<p>✔️ Checking connector status</p>
-<p>The script performs the following tasks:</p>
+<h2 id="5-run-the-streaming-script">5. Run the Streaming script</h2>
+<h4 id="execution-overview">Execution Overview 🎬</h4>
+<p>Before setting up the environment, here’s a quick demo of the streaming pipeline in action:<br>
+📽️
+<div class="video-container"><video style="position:relative;width:100%;height:22.172vw" muted controls alt="type:video"><source src="../videos/streaming-execution.mp4" type="video/mp4"></source></video></div></p>
+<h4 id="run-the-real-time-pipeline-powershell-script">Run the Real-time Pipeline Powershell Script</h4>
+<p>We can start the necessary containers and begin to execute our streaming pipeline.
+</p><div class="highlight"><pre><span></span><code><span class="n">docker-compose</span> <span class="n">up</span> <span class="n">-d</span> 
+</code></pre></div>
+<p>Before preceeding further, you must enable some necessary features:</p>
+<ul>
+<li>
+<p>Enable <code>local_infile</code> on the server side.<br>
+This is required because we use a script to load static data files into MySQL tables using the <code>LOAD DATA LOCAL INFILE</code> command. Without enabling this option, the script will fail to execute the data loading step.
+</p><div class="highlight"><pre><span></span><code>SET GLOBAL local_infile = 1;
+</code></pre></div>
+</li>
+<li>
+<p>Enable MySQL binary logging (binlog).<br>
+Follow the instructions <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#setting-up-mysql" target="_blank">here</a> to create the required user and enable the binlog.
+<code>mysql-src-connector.json</code>.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use a different username or password, make sure to update the following configuration in the <code>mysql-src-connector.json</code> file accordingly:
+</p><div class="highlight"><pre><span></span><code>"database.user": "dbz-user",
+"database.password": "dbz-user",
+</code></pre></div>
+</div>
+<p>Instead of running multiple commands manually, we have a PowerShell script <code>real-time.ps1</code> that automates the entire process, including:</p>
+<p>✔️ Creating necessary tables in MySQL</p>
+<p>✔️ Loading static file into the tables</p>
+<p>✔️ Caching lookup data for later use</p>
+<p>✔️ Registering the MySQL source connector</p>
+<p>✔️ Runing the Kafka client to handle new events</p>
 <ol>
 <li>
-<p><strong>Generate MongoDB Source Connector Configuration</strong> <br>
-</p><div class="highlight"><pre><span></span><code><span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Generate the mongodb-source-connector.json file"</span>
-<span class="n">python</span> <span class="n">connectors</span><span class="o">/</span><span class="n">generate</span><span class="o">-</span><span class="n">mongo</span><span class="o">-</span><span class="n">connector</span><span class="o">.</span><span class="n">py</span> 
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
+<p><strong>Creating necessary tables in MySQL</strong> <br>
+The first step is to create all the tables required for this project.
+</p><div class="highlight"><pre><span></span><code><span class="c"># Run the script to create necessary tables in the MySQL database</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">create_table</span><span class="p">.</span><span class="n">py</span>
+<span class="nb">Write-Host</span> <span class="s2">"============================================================"</span>
 </code></pre></div>
-The first step is to generate the <code>mongodb-source-connector.json</code> file. This file contains the Kafka Source Connector configuration, which is created by the script <code>generate-mongo-connector.py</code> located in the <code>connectors/</code> folder. The configuration file will be generated using connection details stored in <code>config</code>.ini (such as MongoDB credentials, cluster, database, and collection).
-<div class="highlight"><pre><span></span><code><span class="n">user</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"username"</span><span class="p">]</span>
-<span class="n">password</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"password"</span><span class="p">]</span>
-<span class="n">cluster</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"cluster"</span><span class="p">]</span>
-<span class="n">database</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"database"</span><span class="p">]</span>
-<span class="n">collection</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">"mongo"</span><span class="p">][</span><span class="s2">"collection"</span><span class="p">]</span>
-</code></pre></div>
-<strong>Note:</strong> The script <code>generate-mongo-connector.py</code> reads from <code>config.ini and creates the</code>mongodb-source-connector.json` file.<br><br>
-Visit the <a href="https://www.mongodb.com/docs/kafka-connector/current/source-connector/configuration-properties/" target="_blank">MongoDB Kafka Connector Configuration Properties</a> to learn more about the attributes or configuration of the MongoDB source connector.
 </li>
 <li>
-<p><strong>Register MongoDB Source Connector to Kafka Connect</strong> <br>
-</p><div class="highlight"><pre><span></span><code><span class="n">Start</span><span class="o">-</span><span class="n">Sleep</span> <span class="o">-</span><span class="n">Seconds</span> <span class="mi">5</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Registering MongoDB Source Connector..."</span>
-<span class="n">Invoke</span><span class="o">-</span><span class="n">WebRequest</span> <span class="o">-</span><span class="n">Uri</span> <span class="s2">"http://localhost:8083/connectors"</span> <span class="o">-</span><span class="n">Method</span> <span class="n">Post</span> <span class="o">-</span><span class="n">ContentType</span> <span class="s2">"application/json"</span> <span class="o">-</span><span class="n">InFile</span> <span class="s2">".\connectors\mongodb-source-connector.json"</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
+<p><strong>Loading static file into the tables</strong> <br>
+Load CSV files located in the <code>data/</code> folder into corresponding MySQL tables (e.g., stores, products, ...).
+</p><div class="highlight"><pre><span></span><code><span class="c"># Load static reference data (e.g., products, stores) into the database</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">load_static_file</span><span class="p">.</span><span class="n">py</span>
+<span class="nb">Write-Host</span> <span class="s2">"============================================================"</span>
 </code></pre></div>
-After generating the configuration, the script registers the MongoDB Source Connector to Kafka Connect.
 </li>
 <li>
-<p><strong>Register Elasticsearch Sink Connector to Kafka</strong> <br>
-</p><div class="highlight"><pre><span></span><code><span class="n">Start</span><span class="o">-</span><span class="n">Sleep</span> <span class="o">-</span><span class="n">Seconds</span> <span class="mi">5</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Registering Elasticsearch Sink Connector..."</span>
-<span class="n">Invoke</span><span class="o">-</span><span class="n">WebRequest</span> <span class="o">-</span><span class="n">Uri</span> <span class="s2">"http://localhost:8083/connectors"</span> <span class="o">-</span><span class="n">Method</span> <span class="n">Post</span> <span class="o">-</span><span class="n">ContentType</span> <span class="s2">"application/json"</span> <span class="o">-</span><span class="n">InFile</span> <span class="s2">".\connectors\elasticsearch-sink-connector.json"</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
+<p><strong>Caching lookup data</strong> <br>
+Cache frequently accessed reference data to Redis for faster response and reduced database queries.
+</p><div class="highlight"><pre><span></span><code><span class="c"># Populate Redis cache with referential data for faster lookups</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">lookup_data_cache</span><span class="p">.</span><span class="n">py</span>
+<span class="nb">Write-Host</span> <span class="s2">"============================================================"</span>
 </code></pre></div>
-Similarly, the script registers the Elasticsearch Sink Connector to Kafka. This connector’s configuration file is also located in the connector folder.<br><br>
-Visit the <a href="https://docs.confluent.io/kafka-connectors/elasticsearch/current/configuration_options.html" target="_blank">Elasticsearch Sink Connector Documentation</a> to learn more about the attributes or configuration of the Elasticsearch sink connector.
 </li>
 <li>
-<p><strong>Generate Data for Testing</strong> <br>
-</p><div class="highlight"><pre><span></span><code><span class="n">Start</span><span class="o">-</span><span class="n">Sleep</span> <span class="o">-</span><span class="n">Seconds</span> <span class="mi">5</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Generating data ..."</span>
-<span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">mongodb_data</span><span class="o">.</span><span class="n">py</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
+<p><strong>Registering MySQL Source Connector to Kafka Connect</strong> <br>
+Register the MySQL source connector using the <code>mysql-src-connector.json</code> file. This file contains the Kafka Source Connector configuration.
+</p><div class="highlight"><pre><span></span><code><span class="c"># Register the MySQL source connector to Kafka Connect for capturing change data (CDC)</span>
+<span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="s2">"http://localhost:8083/connectors"</span> <span class="n">-Method</span> <span class="n">Post</span> <span class="n">-ContentType</span> <span class="s2">"application/json"</span> <span class="n">-InFile</span> <span class="s2">"./scripts/real-time/mysql-src-connector.json"</span>
+<span class="nb">Write-Host</span> <span class="s2">"============================================================"</span>
 </code></pre></div>
-The script then runs a small data generation process to simulate real-time data streaming, which helps check if the connectors are working properly.
+Refer to <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html" target="_blank">MySQL Kafka Connector Configuration Properties</a> for more details.
 </li>
 <li>
-<p><strong>Check the Status of the Connectors</strong> <br>
-</p><div class="highlight"><pre><span></span><code><span class="n">Start</span><span class="o">-</span><span class="n">Sleep</span> <span class="o">-</span><span class="n">Seconds</span> <span class="mi">5</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Checking MongoDB source connector status..."</span>
-<span class="n">Invoke</span><span class="o">-</span><span class="n">RestMethod</span> <span class="o">-</span><span class="n">Uri</span> <span class="s2">"http://localhost:8083/connectors/mongodb-source/status"</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
-
-<span class="n">Start</span><span class="o">-</span><span class="n">Sleep</span> <span class="o">-</span><span class="n">Seconds</span> <span class="mi">5</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; Checking Elasticsearch sink connector status..."</span>
-<span class="n">Invoke</span><span class="o">-</span><span class="n">RestMethod</span> <span class="o">-</span><span class="n">Uri</span> <span class="s2">"http://localhost:8083/connectors/elasticsearch-sink/status"</span>
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"===================================================="</span>
-
-<span class="n">Write</span><span class="o">-</span><span class="n">Host</span> <span class="s2">"--&gt; If nothing goes wrong, can manual sync Airbyte https://cloud.airbyte.com/workspaces/6abdf744-0697-44b8-9e50-5ef7cabed21e/connections ..."</span>
+<p><strong>Executing the Kafka Client</strong>
+Start the Kafka client to consume new events and execute real-time business logic (e.g., product suggestions).
+</p><div class="highlight"><pre><span></span><code><span class="c"># Start the Kafka client to listen for new order events and handle product suggestions logic</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">real-time</span><span class="p">/</span><span class="n">kafka_client</span><span class="p">.</span><span class="n">py</span>
 </code></pre></div>
-Finally, the script checks the status of both the MongoDB Source Connector and the Elasticsearch Sink Connector to ensure they are running successfully.
 </li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The number of Kafka consumers should be <strong>less than or equal</strong> to the number of partitions to ensure proper parallel processing.<br>
+You can increase or decrease the number of partitions and update the <code>num_workers</code> value accordingly (e.g., <code>num_workers=3</code> means 3 parallel consumer processes).
+</p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="n">num_workers</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">processes</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_workers</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">consumer_worker</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">processes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+</div>
 <hr>
-<p>Full script in the <code>run_pipeline.ps1</code> file.</p>
+<p>Full script in the <code>real-time.ps1</code> file.</p>
 <p>Once all containers are <strong>ready and healthy</strong>, you can access the following services:</p>
 <ul>
 <li>
-<p>Kafka UI: <code>localhost:8000</code>
-<img alt="Image" src="../img/streaming-4.png"></p>
+<p>Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a></p>
 </li>
 <li>
-<p>Kafka Connect UI: <code>localhost:8083</code>
-<img alt="Image" src="../img/streaming-3.png"></p>
+<p>Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a></p>
 </li>
 <li>
-<p>Kibana (ElasticSearch UI): <code>localhost:5601</code>
-<img alt="Image" src="../img/streaming-5.png"></p>
+<p>Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a></p>
+</li>
+<li>
+<p>Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a></p>
 </li>
 </ul>
 <p>Execute the following command to run the entire pipeline setup:
-</p><div class="highlight"><pre><span></span><code>.<span class="se">\r</span>un_pipeline.ps1
+</p><div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">real-time</span><span class="p">.</span><span class="n">ps1</span>
 </code></pre></div>
-Once executed, the output should look similar to the following:
-<p><img alt="Image" src="../img/streaming-6.png">
-<img alt="Image" src="../img/streaming-7.png"></p>
-<p>And now you can create a dashboard in Kibana to monitor trends in real-time.</p>
-<p><img alt="Image" src="../img/streaming-db.png">
-<img alt="Image" src="../img/streaming-db1.png"></p>
+<p>Then, run the script below to update the order status:
+</p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">update_order_status</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+<p>Next, start streaming data into the system:
+</p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">generate_data</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div>
+<p>You can view the demo in the <a href="./#execution-overview">Execution Overview</a>.</p>
+<hr>
+<p>If an alert condition is triggered (e.g., a Kafka broker goes down or a Kafka Connect task fails), an email notification will be sent as shown below:</p>
+<p><a class="glightbox" href="../img/alert.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="../img/alert.png"></a></p>
 <hr></div>
 
 
@@ -1066,5 +1078,7 @@ Once executed, the output should look similar to the following:
       <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>
