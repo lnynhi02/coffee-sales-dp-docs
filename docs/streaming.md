@@ -1,51 +1,67 @@
 # ***⚡ Streaming Pipeline***
-![Image](img/streaming.png)
-<br>
 
-## 1. Configure MongoDB connection
+## 1. Configure MySQL connection
 You need to complete the setup in the [Prerequisites](overview.md#local-setup) section before proceeding.
 
-Set up your `config.ini` file with the necessary credentials to connect to your MongoDB database:
+Set up your `.env` file with the necessary credentials to connect to your MySQL database:
 ```py
-config = configparser.ConfigParser()
-config.read("config.ini")
-
-# Connect to MongoDB
-username = config["mongo"]["username"]
-password = config["mongo"]["password"]
-cluster = config["mongo"]["cluster"]
-database = config["mongo"]["database"]
-
-uri = f"mongodb+srv://{username}:{password}@{cluster}"
-client = MongoClient(uri)
-db = client[database]
+MSQL_HOST=127.0.0.1
+MSQL_USER=root
+MSQL_PASSWORD=yourpassword
+MSQL_DATABASE=coffee_shop
 ```
 
-## 2. Setup Kafka Connect
+## 2. Setup Kafka
 To set up Kafka Connect, we first need to configure the Kafka Broker and Kafka UI as follows:
 
 ### Kafka Broker
-All Kafka container-related data will be stored in `docker_volumes/kafka`
+Two Kafka brokers are configured with data stored in `volumes/kafka-1` and `volumes/kafka-2`. You can scale up (e.g., 3 brokers) if more resources are available.
+
+Since `Prometheus` and `Grafana` are used for monitoring, JMX is also configured for each Kafka broker to export metrics.
 ```py
-kafka:
-    container_name: kafka
-    image: 'bitnami/kafka:latest'
-    user: root
+  kafka-1:
+    container_name: kafka-1
+    image: 'bitnami/kafka:3.5.1'
     ports:
-      - '9094:9094'
+      - '29092:29092'
     networks:
       - myNetwork
     environment:
-      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_NODE_ID=1
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:29092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:9092,EXTERNAL://localhost:29092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
-      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9093,2@kafka-2:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_KRAFT_CLUSTER_ID=k3Fk2HhXQwWL9rPlYxYOoA
+      - KAFKA_OPTS=-javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar=9300:/usr/share/jmx-exporter/kafka-broker.yml
     volumes:
-      - ./docker_volumes/kafka:/bitnami/kafka:rw
+      - ./volumes/kafka-1:/bitnami/kafka
+      - ./volumes/jmx-exporter:/usr/share/jmx-exporter
+
+  kafka-2:
+    container_name: kafka-2
+    image: 'bitnami/kafka:3.5.1'
+    ports:
+      - "29093:29093"
+    environment:
+      - KAFKA_CFG_NODE_ID=2
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:29093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:9092,EXTERNAL://localhost:29093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9093,2@kafka-2:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_KRAFT_CLUSTER_ID=k3Fk2HhXQwWL9rPlYxYOoA
+      - KAFKA_OPTS=-javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar=9300:/usr/share/jmx-exporter/kafka-broker.yml
+    volumes:
+      - ./volumes/kafka-2:/bitnami/kafka
+      - ./volumes/jmx-exporter:/usr/share/jmx-exporter
+    networks:
+      - myNetwork
 ```
 ---
 
@@ -53,64 +69,51 @@ kafka:
 Kafka Connect requires three topics: `connect-configs`, `connect-offsets`, and `connect-status`.
 These topics must be created before starting Kafka Connect, otherwise, the connector will fail to start.
 
+Additionally, we also pre-create the topic `mysql.coffee-shop.order_details`, which is the destination topic where Kafka Connect pushes CDC (Change Data Capture) events from the `order_details` table in MySQL.
+
 To ensure that the topics are created properly, we set up an `init-kafka` container. This container will wait until **Kafka is fully ready** before creating the required topics.
 ```py
   init-kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'bitnami/kafka:3.5.1'
+    container_name: init-kafka
     depends_on:
-      - kafka
+      - kafka-1
+      - kafka-2
     networks:
       - myNetwork
     entrypoint: ["/bin/bash", "-c"]
     command: 
       - |
         echo "Waiting for Kafka to be ready..."
-        while ! kafka-topics.sh --bootstrap-server kafka:9092 --list; do
+        while ! kafka-topics.sh --bootstrap-server kafka-1:9092 --list; do
           sleep 5
         done
 
         echo "🚀 Kafka is ready. Creating topics ...... 🚀"
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-configs
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-offsets
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-status
+        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-configs
+        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 10 --replication-factor 2 --config cleanup.policy=compact  --topic connect-offsets
+        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 5 --replication-factor 2 --config cleanup.policy=compact  --topic connect-status
+        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 5 --replication-factor 2 --topic mysql.coffee_shop.order_details
 
         echo '🚀 Topic created successfully! 🚀'
-        kafka-topics.sh --bootstrap-server kafka:9092 --list
-```
----
-
-### Kafka UI for Monitoring
-To easily monitor Kafka topics and messages, we set up Kafka UI.
-```py
-  kafka-ui:
-    container_name: kafka-ui-1
-    image: provectuslabs/kafka-ui:latest
-    ports:
-      - 8000:8080
-    depends_on:
-      - kafka
-    networks:
-      - myNetwork
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
-      DYNAMIC_CONFIG_ENABLED: 'true'
+        kafka-topics.sh --bootstrap-server kafka-1:9092 --list
 ```
 ---
 
 ### Kafka Connect Configuration
 Finally, we configure Kafka Connect. The `commands` section downloads the required MongoDB and Elasticsearch connector plugins.
 ```py
-connect:
+  connect:
     image: confluentinc/cp-kafka-connect:latest
     hostname: connect
-    container_name: connect
+    container_name: kafka-connect
     depends_on:
-      - kafka
+      - kafka-1
+      - kafka-2
     ports:
       - "8083:8083"
     environment:
-      CONNECT_BOOTSTRAP_SERVERS: "kafka:9092"
+      CONNECT_BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092"
       CONNECT_REST_ADVERTISED_HOST_NAME: "connect"
       CONNECT_GROUP_ID: "connect-cluster"
       CONNECT_CONFIG_STORAGE_TOPIC: "connect-configs"
@@ -119,171 +122,225 @@ connect:
       CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_PLUGIN_PATH: "/usr/share/confluent-hub-components"
-    volumes:
-      - ./docker_volumes/kafka_connect:/data
-    networks:
-      - myNetwork
+      KAFKA_JMX_OPTS: -javaagent:/usr/share/jmx-exporter/jmx_prometheus_javaagent-0.20.0.jar=9300:/usr/share/jmx-exporter/kafka-connect.yml
     command:
       - bash
       - -c
       - |
-        confluent-hub install --no-prompt mongodb/kafka-connect-mongodb:latest
-        confluent-hub install --no-prompt confluentinc/kafka-connect-elasticsearch:latest
-        /etc/confluent/docker/run
-```
----
-
-## 3. ElasticSearch and Kibana
-To ensure that data persists even after restarting the container, we mount the `docker-volumes/elasticsearch_data` folder as a volume for Elasticsearch.
-```py
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.0
-    container_name: elasticsearch
-    ports:
-      - "9200:9200"
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
+          if [ ! -d "/usr/share/confluent-hub-components/debezium-debezium-connector-mysql" ]; then
+            confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
+          fi
+          /etc/confluent/docker/run
     volumes:
-      - ./docker_volumes/elasticsearch_data:/usr/share/elasticsearch/data
+      - ./volumes/jmx-exporter:/usr/share/jmx-exporter/
+      - ./volumes/connector-plugins:/plugins
+    restart: always
     networks:
       - myNetwork
 ```
 ---
 
-Kibana is configured to connect to Elasticsearch via the `ELASTICSEARCH_HOSTS` environment variable:
+## 3. Redis
+Since real-time business logic is implemented (visit [here](index.md#real-time-processing-product-suggestion-logic) for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
 ```py
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.5.0
-    container_name: kibana
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis
     ports:
-      - "5601:5601"
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - ./volumes/redis:/data
     depends_on:
-      - elasticsearch
+      - kafka-1
+      - kafka-2 
     networks:
       - myNetwork
 ```
-!!! note
-      The value of `ELASTICSEARCH_HOSTS` must match the **container name of the Elasticsearch service**.
-      In this setup, our Elasticsearch container is named `elasticsearch`, so Kibana should use `http://elasticsearch:9200`.
-      If the container name is changed, `ELASTICSEARCH_HOSTS` must be updated accordingly.
+---
+
+## 4. Prometheus and Grafana
+Prometheus and Grafana are used to monitor Kafka, gather Kafka metrics, and trigger alerts when errors occur.
+
+You must configure the following environment variables in the `.env` file to enable email alerts in Grafana:
+
+```
+SMTP_USER=your_email@example.com
+SMTP_PASSWORD=your_email_app_password
+SMTP_FROM_ADDRESS=alert_sender@example.com
+```
+!!!note
+    This is an **app password**, not your Gmail account password.
+    Visit <a href="https://support.google.com/mail/answer/185833?hl=en" target="_blank">this guide</a> for more details.
+
+```py
+  prometheus:
+    image: prom/prometheus:v2.50.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./volumes/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - myNetwork
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_HOST=smtp.gmail.com:587
+      - GF_SMTP_USER=${SMTP_USER}
+      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
+      - GF_SMTP_FROM_ADDRESS=${SMTP_FROM_ADDRESS}
+      - GF_SMTP_FROM_NAME=Grafana Alerts
+    volumes:
+      - ./volumes/grafana/data:/var/lib/grafana
+      - ./volumes/monitoring/grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - prometheus
+      - kafka-1
+      - kafka-2
+    networks:
+      - myNetwork
+```
 
 ---
 
-## 4. Run the Streaming script
-Now we can start the necessary containers and begin streaming data to MongoDB and Elasticsearch using the following command:
-```bash
+## 5. Run the Streaming script
+#### Execution Overview 🎬
+Before setting up the environment, here’s a quick demo of the streaming pipeline in action:<br>
+📽️
+![type:video](./videos/streaming-execution.mp4){: style='width: 100%'}
+
+#### Run the Real-time Pipeline Powershell Script
+
+We can start the necessary containers and begin to execute our streaming pipeline.
+```powershell
 docker-compose up -d 
 ```
-<br>
-#### Execution Overview 🎬
-Before setting up the environment, here’s a quick demo of the streaming pipeline in action:
 
-📽️
+Before preceeding further, you must enable some necessary features:
 
-![type:video](./videos/streaming.mp4){: style='width: 100%'}
+- Enable `local_infile` on the server side.<br>
+This is required because we use a script to load static data files into MySQL tables using the `LOAD DATA LOCAL INFILE` command. Without enabling this option, the script will fail to execute the data loading step.
+```
+SET GLOBAL local_infile = 1;
+```
 
+- Enable MySQL binary logging (binlog).<br>
+Follow the instructions <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#setting-up-mysql" target="_blank">here</a> to create the required user and enable the binlog.
+`mysql-src-connector.json`.
+!!! note
+    If you use a different username or password, make sure to update the following configuration in the `mysql-src-connector.json` file accordingly:
+    ```
+    "database.user": "dbz-user",
+    "database.password": "dbz-user",
+    ```
+    
+Instead of running multiple commands manually, we have a PowerShell script `real-time.ps1` that automates the entire process, including:
+
+✔️ Creating necessary tables in MySQL
+
+✔️ Loading static file into the tables
+
+✔️ Caching lookup data for later use
+
+✔️ Registering the MySQL source connector
+
+✔️ Runing the Kafka client to handle new events
+
+1. **Creating necessary tables in MySQL** <br>
+The first step is to create all the tables required for this project.
+```powershell
+# Run the script to create necessary tables in the MySQL database
+python scripts/database/create_table.py
+Write-Host "============================================================"
+```
+
+2. **Loading static file into the tables** <br>
+Load CSV files located in the `data/` folder into corresponding MySQL tables (e.g., stores, products, ...).
+```powershell
+# Load static reference data (e.g., products, stores) into the database
+python scripts/database/load_static_file.py
+Write-Host "============================================================"
+```
+
+3. **Caching lookup data** <br>
+Cache frequently accessed reference data to Redis for faster response and reduced database queries.
+```powershell
+# Populate Redis cache with referential data for faster lookups
+python scripts/database/lookup_data_cache.py
+Write-Host "============================================================"
+```
+
+4. **Registering MySQL Source Connector to Kafka Connect** <br>
+Register the MySQL source connector using the `mysql-src-connector.json` file. This file contains the Kafka Source Connector configuration.
+```powershell
+# Register the MySQL source connector to Kafka Connect for capturing change data (CDC)
+Invoke-WebRequest -Uri "http://localhost:8083/connectors" -Method Post -ContentType "application/json" -InFile "./scripts/real-time/mysql-src-connector.json"
+Write-Host "============================================================"
+```
+Refer to <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html" target="_blank">MySQL Kafka Connector Configuration Properties</a> for more details.
+
+5. **Executing the Kafka Client**
+Start the Kafka client to consume new events and execute real-time business logic (e.g., product suggestions).
+```powershell
+# Start the Kafka client to listen for new order events and handle product suggestions logic
+python scripts/real-time/kafka_client.py
+```
+!!! note
+    The number of Kafka consumers should be **less than or equal** to the number of partitions to ensure proper parallel processing.<br>
+    You can increase or decrease the number of partitions and update the `num_workers` value accordingly (e.g., `num_workers=3` means 3 parallel consumer processes).
+    ```py
+    def main() -> None:
+    num_workers = 3
+    processes = []
+
+    for i in range(num_workers):
+        p = multiprocessing.Process(target=consumer_worker, args=(i,))
+        p.start()
+        processes.append(p)
+
+    for p in processes:
+        p.join()
+    ```
 ---
-
-### Run the Pipeline Script
-Instead of running multiple commands manually, we have a PowerShell script `run_pipeline.ps1` that automates the entire process, including:
-
-✔️ Generating connector configuration
-
-✔️ Registering Kafka Connectors
-
-✔️ Checking connector status
-
-The script performs the following tasks:
-
-1. **Generate MongoDB Source Connector Configuration** <br>
-```py
-Write-Host "--> Generate the mongodb-source-connector.json file"
-python connectors/generate-mongo-connector.py 
-Write-Host "===================================================="
-```
-The first step is to generate the `mongodb-source-connector.json` file. This file contains the Kafka Source Connector configuration, which is created by the script `generate-mongo-connector.py` located in the `connectors/` folder. The configuration file will be generated using connection details stored in `config`.ini (such as MongoDB credentials, cluster, database, and collection).
-```py
-user = config["mongo"]["username"]
-password = config["mongo"]["password"]
-cluster = config["mongo"]["cluster"]
-database = config["mongo"]["database"]
-collection = config["mongo"]["collection"]
-```
-**Note:** The script `generate-mongo-connector.py` reads from `config.ini and creates the `mongodb-source-connector.json` file.<br><br>
-Visit the <a href="https://www.mongodb.com/docs/kafka-connector/current/source-connector/configuration-properties/" target="_blank">MongoDB Kafka Connector Configuration Properties</a> to learn more about the attributes or configuration of the MongoDB source connector.
-
-2. **Register MongoDB Source Connector to Kafka Connect** <br>
-```py
-Start-Sleep -Seconds 5
-Write-Host "--> Registering MongoDB Source Connector..."
-Invoke-WebRequest -Uri "http://localhost:8083/connectors" -Method Post -ContentType "application/json" -InFile ".\connectors\mongodb-source-connector.json"
-Write-Host "===================================================="
-```
-After generating the configuration, the script registers the MongoDB Source Connector to Kafka Connect.
-
-3. **Register Elasticsearch Sink Connector to Kafka** <br>
-```py
-Start-Sleep -Seconds 5
-Write-Host "--> Registering Elasticsearch Sink Connector..."
-Invoke-WebRequest -Uri "http://localhost:8083/connectors" -Method Post -ContentType "application/json" -InFile ".\connectors\elasticsearch-sink-connector.json"
-Write-Host "===================================================="
-```
-Similarly, the script registers the Elasticsearch Sink Connector to Kafka. This connector’s configuration file is also located in the connector folder.<br><br>
-Visit the <a href="https://docs.confluent.io/kafka-connectors/elasticsearch/current/configuration_options.html" target="_blank">Elasticsearch Sink Connector Documentation</a> to learn more about the attributes or configuration of the Elasticsearch sink connector.
-
-4. **Generate Data for Testing** <br>
-```py
-Start-Sleep -Seconds 5
-Write-Host "--> Generating data ..."
-python scripts/mongodb_data.py
-Write-Host "===================================================="
-```
-The script then runs a small data generation process to simulate real-time data streaming, which helps check if the connectors are working properly.
-
-5. **Check the Status of the Connectors** <br>
-```py
-Start-Sleep -Seconds 5
-Write-Host "--> Checking MongoDB source connector status..."
-Invoke-RestMethod -Uri "http://localhost:8083/connectors/mongodb-source/status"
-Write-Host "===================================================="
-
-Start-Sleep -Seconds 5
-Write-Host "--> Checking Elasticsearch sink connector status..."
-Invoke-RestMethod -Uri "http://localhost:8083/connectors/elasticsearch-sink/status"
-Write-Host "===================================================="
-
-Write-Host "--> If nothing goes wrong, can manual sync Airbyte https://cloud.airbyte.com/workspaces/6abdf744-0697-44b8-9e50-5ef7cabed21e/connections ..."
-```
-Finally, the script checks the status of both the MongoDB Source Connector and the Elasticsearch Sink Connector to ensure they are running successfully.
----
-Full script in the `run_pipeline.ps1` file.
+Full script in the `real-time.ps1` file.
 
 Once all containers are **ready and healthy**, you can access the following services:
 
-- Kafka UI: `localhost:8000`
-![Image](img/streaming-4.png)
+- Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
 
-- Kafka Connect UI: `localhost:8083`
-![Image](img/streaming-3.png)
+- Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a>
 
-- Kibana (ElasticSearch UI): `localhost:5601`
-![Image](img/streaming-5.png)
+- Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a>
+
+- Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a>
 
 Execute the following command to run the entire pipeline setup:
-```bash
-.\run_pipeline.ps1
+```powershell
+.\real-time.ps1
 ```
-Once executed, the output should look similar to the following:
 
-![Image](img/streaming-6.png)
-![Image](img/streaming-7.png)
+Then, run the script below to update the order status:
+```powershell
+python scripts/database/update_order_status.py
+```
 
-And now you can create a dashboard in Kibana to monitor trends in real-time.
+Next, start streaming data into the system:
+```powershell
+python scripts/database/generate_data.py
+```
 
-![Image](img/streaming-db.png)
-![Image](img/streaming-db1.png)
+You can view the demo in the [Execution Overview](streaming.md##execution-overview).
+
+---
+
+If an alert condition is triggered (e.g., a Kafka broker goes down or a Kafka Connect task fails), an email notification will be sent as shown below:
+
+![Image](img/alert.png)
 
 ---

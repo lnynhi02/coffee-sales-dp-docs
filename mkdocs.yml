@@ -6,13 +6,12 @@ extra_css:
 
 nav:
   - Documentation: index.md
+  - Evolution: evolution.md
   - Changelog: changelog.md
   - Deployment:
     - Overview: overview.md
     - Streaming Pipeline: streaming.md
     - Batch Pipeline: batch.md
-  - Additional Knowledge:
-    - Kafka Connect versus Kafka Producer and Consumer: kafkaconnect.md
   - References: reference.md
   - GitHub Repository: https://github.com/lnynhi02/coffee-sales-data-pipeline/
 
@@ -50,3 +49,19 @@ plugins:
       is_video: True
       video_muted: True
       video_controls: True
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      slide_effect: slide
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      skip_classes:
+        - custom-skip-class-name
+      auto_caption: false
+      caption_position: bottom
+      background: white
+      shadow: true
+      manual: false
