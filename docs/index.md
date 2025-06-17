@@ -2,27 +2,28 @@
 
 ## I. Design
 ### 1. Project Overview
-This project simulates the data system of a coffee shop chain, focusing on two main objectives:
+This project simulates a data system for a coffee shop chain with two primary goals:
 
-- Real-time product suggestion based on customer orders
-- Daily batch processing to prepare clean and structured data for analytics
+- **Real-time product suggestions** based on new customer orders
+- **Daily batch processing** for analytics-ready data
 
-The system is designed to support both low-latency business logic and large-scale analytical reporting by real-time and batch workflows.
+It is designed to strike a balance between *low-latency business needs* and *scalable analytical workloads*, using a hybrid architecture that includes both streaming and batch components.
 
 ### 2. Business Requirements
-##### Real-time Processing — Product Suggestion Logic
+##### Real-Time: Product Suggestion
 When a new order is placed, the system should evaluate whether it qualifies for a product suggestion. The following conditions must be met:
 
 - The payment method is *bank transfer*, and the bank is *ACB*
 - The customer is a *diamond-tier member*
-- If both conditions are satisfied, the system should suggest a product with a special discount
 
-##### Batch Processing - Cleaned Data Store
-The batch layer handles periodic data processing to prepare it for analytics and reporting. It includes the following stages:
+If all conditions are met, a product with a special discount is suggested — different from those already ordered. We will assume that all product suggestions are accepted by customers.
 
-- Ingest: Extract raw data from the source systems into the data lake or staging area
-- Clean: Apply transformations to validate, filter, and standardize the data
-- Store: Load the processed data into structured storage for further use
+##### Batch: Daily Analytics Preparation
+Each day, raw data is processed to support reporting and dashboarding. This includes:
+
+- Ingest: Load new data from MySQL into the lakehouse
+- Clean: Validate and transform the data
+- Store: Persist structured, queryable datasets for downstream tools
 
 ### 3. Data Source
 The data is divided into several CSV files and used as follows:
@@ -50,16 +51,17 @@ The data is divided into several CSV files and used as follows:
 	- bank: Bank associated with the method (used for bank transfer only).
 	- updated_at: The date when the payment method data was last updated.
 5. `diamond_customers.csv`: List of diamond-tier customers.
-	- id: TUnique identifier for the customer.
+	- id: Unique identifier for the customer.
 	- name: The name of customer.
 	- phone_number: Customer’s phone number.
 	- updated_at: Timestamp of the last update to this diamond customer’s data.
 6. `orders`: This data is generated automatically via a Python script. It includes detailed information about the orders info and loaded into MySQL.
 	- id: Unique ID for each order.
 	- timestamp: Date and time when the order was placed.
-	- store_id: The ID of the store where the order took place
-	- payment_method_id: The payment method used for the order
+	- store_id: The ID of the store where the order took place.
+	- payment_method_id: The payment method used for the order.
 	- customer_id: Customer who orders.
+	- status: The status of the orders (pending or completed).
 7. `order_details`: Auto-generated data representing products in each order (loaded into MySQL)
 	- order_id: Identifier linking to the corresponding order.
 	- product_id: ID of the purchased product.
@@ -68,25 +70,22 @@ The data is divided into several CSV files and used as follows:
 	- subtotal: Total price for this product (unit_price × quantity)
 	- is_suggestion: Indicates whether this product was suggested (used in business logic).
 
-### 4. Task Flow
+### 4. Architecture at a Glance
 ![Image](img/task-flow.png)
 
-The diagram above outlines the key functional tasks in both real-time and batch layers. It starts from data ingestion and proceeds through cleaning, business logic (e.g., product suggestion), and finally to storage for analytics.
+The system separates responsibilities into two pipelines:
 
-The logic separates cleanly into two flows:
+- Real-time pipeline: Handles event-driven product suggestion logic upon new orders
+- Batch pipeline: Periodically transforms and stores data into the Lakehouse for analytics
 
-- Real-time: Triggered upon new order events and checks eligibility for product suggestions.
-- Batch: Periodically processes historical data for analytical use.
+### 5. MySQL: Transactional Landing Zone
+MySQL is used as the initial data store for real-time order generation, chosen for its:
 
-### 5. Database Design for Landing Data (MySQL)
-To simulate a transactional environment, we use MySQL as the landing database to store raw order data. MySQL is chosen for its compatibility with CDC tools (e.g., Kafka Connect), support for ACID transactions, and ease of integration with Python-based data generators.
+- Compatibility with CDC tools like Kafka Connect
+- Support for ACID transactions
+- Easy integration with Python-based data generators
 
 This layer includes core tables such as `orders`, `order_details`, and reference tables like `products`, `stores`, `payment_methods`, etc.,
-
-These tables serve two purposes:
-
-- Act as a source of truth for both real-time and batch pipelines.
-- Allow external tools (e.g., Kafka Connect) to listen to changes and push them into the message broker.
 
 The ER diagram below illustrates the relationships between the core tables:
 ![Image](img/database-design.png)
@@ -148,18 +147,14 @@ Captures detailed coffee shop order transactions for reporting and analysis.
 ### 7. Data Pipeline Design
 ![Image](img/data-pipeline-v1.1.png)
 
-#### Stream Processing
-##### Real-time Suggestion Logic
-A Kafka Consumer listens to the topic containing order details.
-It checks the following conditions to determine whether a product suggestion should be made:
+#### Real-time Flow
+Order events are captured via Kafka Connect from MySQL. And Kafka Consumers check the following conditions to determine whether a product suggestion should be made:
 
 - Whether the customer is a *diamond-tier* member
 - Whether the payment method is *bank transfer*
 - Whether the associated bank is *ACB*
 
-If all conditions are satisfied, the system suggests a product different from those already ordered.
-
-The system assumes the customer always accepts the suggestion. The confirmed suggestion is then published to the topic `order_suggestion_accepted`.
+If all conditions are satisfied, the system suggests a product different from those already ordered. And then suggestions are published to the `order_suggestion_accepted` topic.
 
 ##### Caching Strategy for Real-time Processing
 Since condition checks are performed continuously in real time, lookup tables are cached in Redis to optimize performance:
@@ -169,13 +164,14 @@ Since condition checks are performed continuously in real time, lookup tables ar
 - diamond_customers: List of all customers with diamond-tier membership
 - order_info: Mapping of `order_id` to `customer_id` and `payment_method_id` for fast acces
 
-#### Batch Processing
+#### Batch Flow
 Data is loaded into the Lakehouse following the Medallion Architecture.
 
 - *Incremental Load* is applied to optimize data processing.
 - *Slowly Changing Dimension (SCD Type 2)* is implemented for dimension tables to preserve historical changes.
+- Airflow orchestrates daily ETL jobs with clear dependencies.
 
-#### Why Tech Selection
+#### Technology Choices: Why They Matter
 To support both real-time responsiveness and scalable analytics, this project combines various technologies, each chosen for specific reasons:
 
 - **Kafka** is adopted due to the *event-driven* nature of the product suggestion logic, which must react instantly as new orders arrive. Kafka enables this by:
