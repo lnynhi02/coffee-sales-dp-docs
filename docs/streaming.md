@@ -335,7 +335,7 @@ Next, start streaming data into the system:
 python scripts/database/generate_data.py
 ```
 
-You can view the demo in the [Execution Overview](streaming.md##execution-overview).
+You can view the demo in the [Execution Overview](streaming.md#execution-overview).
 
 ---
 

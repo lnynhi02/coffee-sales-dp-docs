@@ -12,7 +12,7 @@
       
       
       
-        <link rel="next" href="changelog/">
+        <link rel="next" href="evolution/">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -55,7 +55,16 @@
     
     
     
-  </head>
+   <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -250,73 +259,37 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-business-problem-simulation" class="md-nav__link">
+  <a href="#1-project-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Business Problem (Simulation)
+      1. Project Overview
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-data-source" class="md-nav__link">
+  <a href="#2-business-requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Data Source
+      2. Business Requirements
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-business-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Business Requirements
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-database-design-to-store-raw-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Database Design to store raw data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-data-warehouse" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Data Warehouse
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Data Warehouse">
+    <nav class="md-nav" aria-label="2. Business Requirements">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#staging-tables" class="md-nav__link">
+  <a href="#real-time-processing-product-suggestion-logic" class="md-nav__link">
     <span class="md-ellipsis">
-      Staging Tables
+      Real-time Processing — Product Suggestion Logic
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dimension-tables" class="md-nav__link">
+  <a href="#batch-processing-cleaned-data-store" class="md-nav__link">
     <span class="md-ellipsis">
-      Dimension Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fact-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fact Tables
+      Batch Processing - Cleaned Data Store
     </span>
   </a>
   
@@ -328,46 +301,163 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-etl-design" class="md-nav__link">
+  <a href="#3-data-source" class="md-nav__link">
     <span class="md-ellipsis">
-      6. ETL Design
+      3. Data Source
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. ETL Design">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-task-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Task Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-database-design-for-landing-data-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Database Design for Landing Data (MySQL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-lakehouse-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Lakehouse Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Lakehouse Architecture">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#etl-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      ETL Diagram
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Task Flow
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tech-selection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tech Selection
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-in-gold-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model in Gold Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gold-layer-data-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gold Layer Data Catalog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gold Layer Data Catalog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glddim_products" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.dim_products
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glddim_stores" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.dim_stores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gldfact_orders" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.fact_orders
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-data-pipeline-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Data Pipeline Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Data Pipeline Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stream Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stream Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-time-suggestion-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Suggestion Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy-for-real-time-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy for Real-time Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-tech-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Tech Selection
     </span>
   </a>
   
@@ -396,6 +486,27 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="evolution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Evolution
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -442,10 +553,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -457,8 +568,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Deployment
           </label>
@@ -520,78 +631,6 @@
   
   <span class="md-ellipsis">
     Batch Pipeline
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
-            
-  
-  <span class="md-ellipsis">
-    Additional Knowledge
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Additional Knowledge
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="kafkaconnect/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Kafka Connect versus Kafka Producer and Consumer
     
   </span>
   
@@ -688,73 +727,37 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-business-problem-simulation" class="md-nav__link">
+  <a href="#1-project-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Business Problem (Simulation)
+      1. Project Overview
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-data-source" class="md-nav__link">
+  <a href="#2-business-requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Data Source
+      2. Business Requirements
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-business-requirements" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Business Requirements
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-database-design-to-store-raw-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Database Design to store raw data
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-data-warehouse" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Data Warehouse
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Data Warehouse">
+    <nav class="md-nav" aria-label="2. Business Requirements">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#staging-tables" class="md-nav__link">
+  <a href="#real-time-processing-product-suggestion-logic" class="md-nav__link">
     <span class="md-ellipsis">
-      Staging Tables
+      Real-time Processing — Product Suggestion Logic
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dimension-tables" class="md-nav__link">
+  <a href="#batch-processing-cleaned-data-store" class="md-nav__link">
     <span class="md-ellipsis">
-      Dimension Tables
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fact-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Fact Tables
+      Batch Processing - Cleaned Data Store
     </span>
   </a>
   
@@ -766,46 +769,163 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#6-etl-design" class="md-nav__link">
+  <a href="#3-data-source" class="md-nav__link">
     <span class="md-ellipsis">
-      6. ETL Design
+      3. Data Source
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. ETL Design">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-task-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Task Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-database-design-for-landing-data-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Database Design for Landing Data (MySQL)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-lakehouse-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Lakehouse Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Lakehouse Architecture">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#etl-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      ETL Diagram
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      Task Flow
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tech-selection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tech Selection
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#data-flow" class="md-nav__link">
     <span class="md-ellipsis">
       Data Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-model-in-gold-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Model in Gold Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gold-layer-data-catalog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gold Layer Data Catalog
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gold Layer Data Catalog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glddim_products" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.dim_products
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glddim_stores" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.dim_stores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gldfact_orders" class="md-nav__link">
+    <span class="md-ellipsis">
+      gld.fact_orders
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-data-pipeline-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Data Pipeline Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Data Pipeline Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stream Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stream Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#real-time-suggestion-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Suggestion Logic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy-for-real-time-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy for Real-time Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-tech-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Tech Selection
     </span>
   </a>
   
@@ -848,240 +968,326 @@
 
 <div><h1 id="documentation"><strong><em>📝 DOCUMENTATION</em></strong></h1>
 <h2 id="i-design">I. Design</h2>
-<h3 id="1-business-problem-simulation">1. Business Problem (Simulation)</h3>
-<p>This project simulates transaction data from a coffee shop. The data used includes:</p>
+<h3 id="1-project-overview">1. Project Overview</h3>
+<p>This project simulates the data system of a coffee shop chain, focusing on two main objectives:</p>
 <ul>
-<li><code>transactions</code>: Raw transaction data generated to simulate real-world coffee shop sales.</li>
-<li><code>product</code>:The list of products that are currently being sold in the coffee shops.</li>
-<li><code>store</code>: Represents various branches or locations of the coffee shop.</li>
-<li><code>payment_method</code>: The payment method used when ordering.</li>
+<li>Real-time product suggestion based on customer orders</li>
+<li>Daily batch processing to prepare clean and structured data for analytics</li>
 </ul>
-<h3 id="2-data-source">2. Data Source</h3>
+<p>The system is designed to support both low-latency business logic and large-scale analytical reporting by real-time and batch workflows.</p>
+<h3 id="2-business-requirements">2. Business Requirements</h3>
+<h5 id="real-time-processing-product-suggestion-logic">Real-time Processing — Product Suggestion Logic</h5>
+<p>When a new order is placed, the system should evaluate whether it qualifies for a product suggestion. The following conditions must be met:</p>
+<ul>
+<li>The payment method is <em>bank transfer</em>, and the bank is <em>ACB</em></li>
+<li>The customer is a <em>diamond-tier member</em></li>
+<li>If both conditions are satisfied, the system should suggest a product with a special discount</li>
+</ul>
+<h5 id="batch-processing-cleaned-data-store">Batch Processing - Cleaned Data Store</h5>
+<p>The batch layer handles periodic data processing to prepare it for analytics and reporting. It includes the following stages:</p>
+<ul>
+<li>Ingest: Extract raw data from the source systems into the data lake or staging area</li>
+<li>Clean: Apply transformations to validate, filter, and standardize the data</li>
+<li>Store: Load the processed data into structured storage for further use</li>
+</ul>
+<h3 id="3-data-source">3. Data Source</h3>
 <p>The data is divided into several CSV files and used as follows:</p>
 <ol>
 <li><code>product.csv</code>: A list of products sold in the coffee shop.  <ul>
-<li>product_id: Unique ID of the product  </li>
+<li>id: Unique ID of the product  </li>
 <li>name: Name of the product  </li>
-<li>category_id: The category ID that the product belongs to</li>
-<li>price: The price of the product</li>
+<li>category_id: ID of the category this product belongs to</li>
+<li>unit_price: The price of the product</li>
+<li>updated_at: Timestamp of the last update to this product’s data</li>
 </ul>
 </li>
 <li><code>product_category.csv</code>: The category of the product.<ul>
 <li>id: Unique ID for each product category</li>
-<li>name: Name of the product category</li>
-<li>modified_date: The date the category data was last updated</li>
+<li>name: Name of the category</li>
+<li>updated_at: Timestamp of the last update to this category’s data</li>
 </ul>
 </li>
 <li><code>store.csv</code>: The branches of the coffee shop.<ul>
 <li>id: Unique ID for each coffee shop location</li>
 <li>name: Name of the coffee shop branch</li>
 <li>address: The address of the coffee shop</li>
-<li>district: The district where the coffee shop is located</li>
+<li>district: The district where the branch is located</li>
+<li>city: The city that the branch is located.</li>
+<li>updated_at: Timestamp of the last update to this store’s data.</li>
 </ul>
 </li>
 <li><code>payment_method.csv</code>: The payment methods supported by the coffee shop<ul>
 <li>id: Unique ID for each payment method</li>
-<li>method: The name of the payment method (e.g., Cash, Credit Card, etc.)</li>
-<li>modified_date: The date when the payment method data was last updated.</li>
+<li>method_name: The name of the payment method (e.g., Cash, Credit Card, etc.)</li>
+<li>bank: Bank associated with the method (used for bank transfer only).</li>
+<li>updated_at: The date when the payment method data was last updated.</li>
 </ul>
 </li>
-<li><code>transactions</code>: This JSON data is generated automatically via a Python script. It includes detailed information about the transactions and loaded into MongoDB.<ul>
-<li>timestamp: The date and time of the transaction</li>
-<li>store_id: The ID of the store where the transaction took place</li>
-<li>total_amount: The total amount of the transaction</li>
-<li>payment_method: The payment method used for the transaction</li>
-<li>currency: The currency of the transaction</li>
-<li>items: An array of the products sold during the transaction, where each item contains<ul>
-<li>product_id: Unique ID of the product</li>
-<li>name: Name of the product</li>
-<li>category: Category name of the product</li>
-<li>quantity: The quantity of the product sold</li>
-<li>subtotal: The total amount for that product (price × quantity)</li>
+<li><code>diamond_customers.csv</code>: List of diamond-tier customers.<ul>
+<li>id: TUnique identifier for the customer.</li>
+<li>name: The name of customer.</li>
+<li>phone_number: Customer’s phone number.</li>
+<li>updated_at: Timestamp of the last update to this diamond customer’s data.</li>
 </ul>
 </li>
+<li><code>orders</code>: This data is generated automatically via a Python script. It includes detailed information about the orders info and loaded into MySQL.<ul>
+<li>id: Unique ID for each order.</li>
+<li>timestamp: Date and time when the order was placed.</li>
+<li>store_id: The ID of the store where the order took place</li>
+<li>payment_method_id: The payment method used for the order</li>
+<li>customer_id: Customer who orders.</li>
 </ul>
 </li>
-</ol>
-<h3 id="3-business-requirements">3. Business Requirements</h3>
-<ol>
-<li>
-<p>Real-time Analysis: Analyze transactions in real-time to monitor trends</p>
-<ul>
-<li>Identify the busiest times during the day to optimize staffing and inventory.</li>
-<li>Real-time tracking of the number of products sold, revenue, and number of bills.</li>
-<li>Monitor the most frequently used payment methods to understand customer preferences.</li>
-<li>Monitor which branch of the coffee shop generates the most revenue.</li>
-</ul>
-</li>
-<li>
-<p>Daily &amp; Weekly Analysis: Generate comprehensive daily and weekly reports to summarize sales performance and trends.</p>
-<ul>
-<li>Daily Sales Summary: Total sales and transaction volume for each store.</li>
-<li>Product Sales Breakdown: A report detailing the performance of each product and its category.</li>
-<li>Store Performance: Compare sales performance across different branches to identify high-performing stores.</li>
+<li><code>order_details</code>: Auto-generated data representing products in each order (loaded into MySQL)<ul>
+<li>order_id: Identifier linking to the corresponding order.</li>
+<li>product_id: ID of the purchased product.</li>
+<li>quantity: Quantity of the product purchased.</li>
+<li>discount_percent: Discount applied to this product (used in business logic). </li>
+<li>subtotal: Total price for this product (unit_price × quantity)</li>
+<li>is_suggestion: Indicates whether this product was suggested (used in business logic).</li>
 </ul>
 </li>
 </ol>
-<h3 id="4-database-design-to-store-raw-data">4. Database Design to store raw data</h3>
-<ol>
-<li><code>transactions</code>: Raw transactions coffee data that loaded into PostgreSQL from MongoDB<ul>
-<li>_id: Unique ID of each transaction generated form source database (in this case MongoDB)</li>
-<li>timestamp: The date and time of the transaction     </li>
-<li>store_id:  Unique ID of the store</li>
-<li>total_amount: The total amount of the transaction</li>
-<li>payment_method: The payment method used for the transaction</li>
-<li>currency: The currency of the transaction</li>
-<li>items: An array of the products sold during the transaction, where each item contains<ul>
-<li>product_id: Unique ID of the product</li>
-<li>name: Name of the product</li>
-<li>category: Category name of the product     </li>
-<li>quantity: The quantity of the product sold</li>
-<li>subtotal: The total amount for that product (price × quantity)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>dbo_raw.product</code>: Loaded from <code>product.csv</code><ul>
-<li>product_id</li>
-<li>name</li>
-<li>category_id</li>
-<li>price</li>
-</ul>
-</li>
-<li><code>dbo_raw.product_category</code>: Loaded from <code>product_category.csv</code><ul>
-<li>id</li>
-<li>name</li>
-<li>modified_date</li>
-</ul>
-</li>
-<li><code>dbo_raw.payment_method</code>: Loaded from <code>payment_method.csv</code><ul>
-<li>id</li>
-<li>method</li>
-<li>modified_date</li>
-</ul>
-</li>
-<li><code>dbo_raw.store</code>: Loaded from <code>store.csv</code><ul>
-<li>id</li>
-<li>name</li>
-<li>address</li>
-<li>district</li>
-</ul>
-</li>
-</ol>
-<h3 id="5-data-warehouse">5. Data Warehouse</h3>
-<p>In the data warehouse, we structure data into <strong>staging tables</strong>, <strong>dimension tables</strong>, and <strong>fact tables</strong> to support analytical queries efficiently.</p>
-<h4 id="staging-tables">Staging Tables</h4>
-<p>Staging tables contain transformed data, preparing it for fact and dimension tables. The table <code>stg_sales</code> reads data from the source system (PostgreSQL in this case) and transforms it. For example, in the raw <code>transactions</code> table, the <code>items</code> column is stored as an array. We explode it into multiple rows to make analysis easier.</p>
+<h3 id="4-task-flow">4. Task Flow</h3>
+<p><a class="glightbox" href="img/task-flow.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/task-flow.png"></a></p>
+<p>The diagram above outlines the key functional tasks in both real-time and batch layers. It starts from data ingestion and proceeds through cleaning, business logic (e.g., product suggestion), and finally to storage for analytics.</p>
+<p>The logic separates cleanly into two flows:</p>
 <ul>
-<li><code>stg_sales</code><ul>
-<li>sales_id: The natural key of the transaction (renamed from <code>_id</code> from source data)</li>
-<li>timestamp: The date and time of the transaction</li>
-<li>store_id: The natural key of the store</li>
-<li>payment_method_id: The natural key of the payment method</li>
-<li>product_id: The natural key of the product</li>
-<li>quantity: The quantity of the product sold</li>
-<li>subtotal: The total amount for that product (price × quantity)</li>
+<li>Real-time: Triggered upon new order events and checks eligibility for product suggestions.</li>
+<li>Batch: Periodically processes historical data for analytical use.</li>
 </ul>
-</li>
-</ul>
-<h4 id="dimension-tables">Dimension Tables</h4>
-<p>Dimension tables store attributes of key entities. In this project, we have three dimension tables: <code>dim_product</code>, <code>dim_store</code>, and <code>dim_payment</code>.</p>
-<ol>
-<li><code>dim_product</code><ul>
-<li>product_key: Surrogate key of the product</li>
-<li>product_id: The natural key of the product (from <code>dbo_raw.product</code>)</li>
-<li>product_name: Name of the product</li>
-<li>category_name: Category that the product belongs to (from <code>dbo_raw.product_category</code>)</li>
-<li>price: Price of the product</li>
-</ul>
-</li>
-<li><code>dim_store</code><ul>
-<li>store_key: Surrogate key of the store</li>
-<li>store_id: The natural key of the store (from <code>dbo_raw.store</code>)</li>
-<li>store_name: Name of the store</li>
-<li>address: Address of the store</li>
-<li>district: District where the coffee shop is located</li>
-</ul>
-</li>
-<li><code>dim_payment</code><ul>
-<li>payment_method_key: Surrogate key of the payment method</li>
-<li>payment_method_id: The natural key of payment method (from <code>dbo_raw.payment_method</code>)</li>
-<li>payment_method: Name of the payment method</li>
-<li>modified_date: The date when the payment method data was last updated</li>
-</ul>
-</li>
-</ol>
-<h4 id="fact-tables">Fact Tables</h4>
-<p>Fact tables store transactional data, linking to dimension tables via foreign keys. In this project, we have one fact table: <code>fact_sales</code></p>
+<h3 id="5-database-design-for-landing-data-mysql">5. Database Design for Landing Data (MySQL)</h3>
+<p>To simulate a transactional environment, we use MySQL as the landing database to store raw order data. MySQL is chosen for its compatibility with CDC tools (e.g., Kafka Connect), support for ACID transactions, and ease of integration with Python-based data generators.</p>
+<p>This layer includes core tables such as <code>orders</code>, <code>order_details</code>, and reference tables like <code>products</code>, <code>stores</code>, <code>payment_methods</code>, etc.,</p>
+<p>These tables serve two purposes:</p>
 <ul>
-<li><code>fact_sales</code><ul>
-<li>sales_key: Unique identifier for each row, generated using a combination of sales_id and product_id</li>
-<li>store_key: Foreign key referencing <code>dim_store</code></li>
-<li>product_key: Foreign key referencing <code>dim_product</code></li>
-<li>payment_method_key: Foreign key referencing <code>dim_payment</code></li>
-<li>sales_id: The natural key of the sale (from raw data <code>transactions</code>)</li>
-<li>timestamp: The date and time of the transaction</li>
-<li>quantity: The quantity of the product sold</li>
-<li>revenue: The total amount for that product (renamed from <code>subtotal</code>)</li>
+<li>Act as a source of truth for both real-time and batch pipelines.</li>
+<li>Allow external tools (e.g., Kafka Connect) to listen to changes and push them into the message broker.</li>
 </ul>
-</li>
-</ul>
-<p>The following diagram illustrates the relationship between the dimension and fact tables mentioned above:<br>
-<img alt="Image" src="img/coffee_dw_diagram.png"></p>
-<h3 id="6-etl-design">6. ETL Design</h3>
-<h4 id="etl-diagram">ETL Diagram</h4>
-<p><img alt="Image" src="img/etl-diagram.png"></p>
-<h4 id="task-flow">Task Flow</h4>
-<ol>
-<li>
-<p>Streaming Flow
-<img alt="Image" src="img/streaming-flow.png"></p>
-</li>
-<li>
-<p>Batch Flow
-<img alt="Image" src="img/batch-flow.png"></p>
-</li>
-</ol>
-<h4 id="tech-selection">Tech Selection</h4>
-<p><img alt="Image" src="img/tech-selection.png"></p>
-<ol>
-<li>
-<p>Streaming Pipeline</p>
+<p>The ER diagram below illustrates the relationships between the core tables:
+<a class="glightbox" href="img/database-design.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/database-design.png"></a></p>
+<h3 id="6-lakehouse-architecture">6. Lakehouse Architecture</h3>
+<p>In the lakehouse, we structure data using the <em>Medallion Architecture</em>:</p>
 <ul>
-<li><code>KafkaConnect</code><ul>
-<li>Enables seamless data integration between systems without requiring custom code—just create a JSON configuration file.</li>
-<li>Supports CDC (Change Data Capture), allowing real-time tracking of data changes from source databases (e.g., MongoDB) and streaming them directly into Kafka before loading to the destination.</li>
+<li><strong>Bronze</strong>: raw data ingested from source systems</li>
+<li><strong>Silver</strong>: cleaned, transformed and joined data</li>
+<li><strong>Gold</strong>: aggregated and business-consumable data for dashboarding and analytics</li>
 </ul>
-</li>
-<li><code>ElasticSearch</code> &amp; <code>Kibana</code><ul>
-<li>A powerful real-time search and analytics engine optimized for transactional and log data, making it ideal for real-time analysis in a coffee shop.</li>
-<li>Kibana provides intuitive data visualization, allowing users to build real-time dashboards in Elasticsearch without coding.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Batch Pipeline</p>
-<ul>
-<li><code>Airbyte</code><ul>
-<li>A low-code data integration tool that simplifies extracting and loading data across systems.</li>
-<li>Easy to configure connections between various data sources and destinations.</li>
-<li>Automatically applies schema mapping when transferring data from NoSQL (e.g., MongoDB) to SQL (PostgreSQL).</li>
-</ul>
-</li>
-<li><code>PostgreSQL</code> &amp; <code>DBT</code><ul>
-<li>PostgreSQL serves as the data warehouse, providing a structured environment for data transformation and analysis.</li>
-<li>DBT (Data Build Tool) is used for transforming raw data into meaningful insights using SQL-based modeling.</li>
-<li>DBT also supports data quality checks, including not null, unique, and referential integrity constraints to ensure clean and reliable data.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
 <h4 id="data-flow">Data Flow</h4>
+<p><a class="glightbox" href="img/data-flow.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/data-flow.png"></a></p>
+<h4 id="data-model-in-gold-layer">Data Model in Gold Layer</h4>
+<p><a class="glightbox" href="img/star-schema.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/star-schema.png"></a></p>
+<h4 id="gold-layer-data-catalog">Gold Layer Data Catalog</h4>
+<h5 id="glddim_products">gld.dim_products</h5>
+<p>Provides information about the products and their attributes.</p>
+<table>
+<thead>
+<tr>
+<th>Column Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>product_key</td>
+<td>int</td>
+<td>Surrogate key for the product (unique per version for SCD2 tracking).</td>
+</tr>
+<tr>
+<td>product_id</td>
+<td>string</td>
+<td>Natural/business key from the original product source.</td>
+</tr>
+<tr>
+<td>product_name</td>
+<td>string</td>
+<td>Name of the product.</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>Category that the product belongs to.</td>
+</tr>
+<tr>
+<td>unit_price</td>
+<td>int</td>
+<td>Price per unit of the product.</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>date</td>
+<td>Date when this version of the product record became valid.</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>date</td>
+<td>Date when this version stopped being valid (null if current).</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>boolean</td>
+<td>Indicates whether this is the current version of the product (true/false).</td>
+</tr>
+</tbody>
+</table>
+<h5 id="glddim_stores">gld.dim_stores</h5>
+<p>Provides information about store locations and their attributes.</p>
+<table>
+<thead>
+<tr>
+<th>Column Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>store_key</td>
+<td>int</td>
+<td>Surrogate key for the store (unique per version for SCD2 tracking).</td>
+</tr>
+<tr>
+<td>store_id</td>
+<td>int</td>
+<td>Natural/business key from the original store source.</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Full address of the store.</td>
+</tr>
+<tr>
+<td>district</td>
+<td>string</td>
+<td>District where the store is located.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>City where the store is located.</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>date</td>
+<td>Date when this version of the store record became valid.</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>date</td>
+<td>Date when this version stopped being valid (null if current).</td>
+</tr>
+<tr>
+<td>is_current</td>
+<td>boolean</td>
+<td>Indicates whether this is the current version of the store (true/false).</td>
+</tr>
+</tbody>
+</table>
+<h5 id="gldfact_orders">gld.fact_orders</h5>
+<p>Captures detailed coffee shop order transactions for reporting and analysis.</p>
+<table>
+<thead>
+<tr>
+<th>Column Name</th>
+<th>Data Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>order_date</td>
+<td>date</td>
+<td>The date when the order was placed.</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>string</td>
+<td>Unique identifier for each order.</td>
+</tr>
+<tr>
+<td>customer_id</td>
+<td>int</td>
+<td>Identifier for the customer who placed the order.</td>
+</tr>
+<tr>
+<td>store_key</td>
+<td>int</td>
+<td>Foreign key referencing the store dimension.</td>
+</tr>
+<tr>
+<td>payment_method_key</td>
+<td>int</td>
+<td>Foreign key referencing the payment method used.</td>
+</tr>
+<tr>
+<td>product_key</td>
+<td>int</td>
+<td>Foreign key referencing the purchased product.</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>int</td>
+<td>Number of units of the product ordered.</td>
+</tr>
+<tr>
+<td>subtotal</td>
+<td>int</td>
+<td>Total cost for the product line.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-data-pipeline-design">7. Data Pipeline Design</h3>
+<p><a class="glightbox" href="img/data-pipeline-v1.1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/data-pipeline-v1.1.png"></a></p>
+<h4 id="stream-processing">Stream Processing</h4>
+<h5 id="real-time-suggestion-logic">Real-time Suggestion Logic</h5>
+<p>A Kafka Consumer listens to the topic containing order details.
+It checks the following conditions to determine whether a product suggestion should be made:</p>
 <ul>
-<li>Batch Data Flow: <br>
-<img alt="Image" src="img/data-flow.png"></li>
+<li>Whether the customer is a <em>diamond-tier</em> member</li>
+<li>Whether the payment method is <em>bank transfer</em></li>
+<li>Whether the associated bank is <em>ACB</em></li>
+</ul>
+<p>If all conditions are satisfied, the system suggests a product different from those already ordered.</p>
+<p>The system assumes the customer always accepts the suggestion. The confirmed suggestion is then published to the topic <code>order_suggestion_accepted</code>.</p>
+<h5 id="caching-strategy-for-real-time-processing">Caching Strategy for Real-time Processing</h5>
+<p>Since condition checks are performed continuously in real time, lookup tables are cached in Redis to optimize performance:</p>
+<ul>
+<li>products: List of all available products</li>
+<li>payment_methods: Only ID of method bank transfer and bank name ACB</li>
+<li>diamond_customers: List of all customers with diamond-tier membership</li>
+<li>order_info: Mapping of <code>order_id</code> to <code>customer_id</code> and <code>payment_method_id</code> for fast acces</li>
+</ul>
+<h4 id="batch-processing">Batch Processing</h4>
+<p>Data is loaded into the Lakehouse following the Medallion Architecture.</p>
+<ul>
+<li><em>Incremental Load</em> is applied to optimize data processing.</li>
+<li><em>Slowly Changing Dimension (SCD Type 2)</em> is implemented for dimension tables to preserve historical changes.</li>
+</ul>
+<h4 id="why-tech-selection">Why Tech Selection</h4>
+<p>To support both real-time responsiveness and scalable analytics, this project combines various technologies, each chosen for specific reasons:</p>
+<ul>
+<li>
+<p><strong>Kafka</strong> is adopted due to the <em>event-driven</em> nature of the product suggestion logic, which must react instantly as new orders arrive. Kafka enables this by:</p>
+<ul>
+<li>Supporting Change Data Capture via Kafka Connect for syncing new orders in near real-time.</li>
+<li>Offering parallel processing through partitioned topics, allowing multiple consumers to handle multiple orders in parallel.</li>
+</ul>
+</li>
+<li>
+<p><strong>Redis</strong> is used to cache lookup data (e.g., products, diamond-tier customers, payment methods) to reduce excessive access database access and enable fast condition evaluation. This avoids redundant queries and supports low-latency processing at scale.</p>
+</li>
+<li>
+<p><strong>Apache Spark</strong> is chosen to build the Lakehouse architecture:</p>
+<ul>
+<li>Handles both structured and semi-structured data.</li>
+<li>Supports efficient storage formats like <em>Parquet</em>, which reduce storage costs via compression and columnar encoding.</li>
+<li>Integrates with <em>Delta</em> format, which adds ACID compliance, time travel, and incremental processing capabilities — all essential for building reliable, maintainable batch pipelines and Slowly Changing Dimensions (SCD Type 2).</li>
+</ul>
+</li>
+<li>
+<p><strong>Airflow</strong>  is used to orchestrate repetitive batch jobs, removing the need for manual intervention.</p>
+</li>
 </ul>
 <h2 id="ii-deployment">II. <a href="overview/">Deployment</a></h2></div>
 
@@ -1142,5 +1348,7 @@
       <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

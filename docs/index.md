@@ -98,9 +98,6 @@ In the lakehouse, we structure data using the *Medallion Architecture*:
 - **Silver**: cleaned, transformed and joined data
 - **Gold**: aggregated and business-consumable data for dashboarding and analytics
 
-#### Data Flow
-![Image](img/data-flow.png)
-
 #### Data Model in Gold Layer
 ![Image](img/star-schema.png)
 
