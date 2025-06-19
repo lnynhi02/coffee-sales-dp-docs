@@ -163,7 +163,7 @@ Since condition checks are performed continuously in real time, lookup tables ar
 - products: List of all available products
 - payment_methods: Only ID of method bank transfer and bank name ACB
 - diamond_customers: List of all customers with diamond-tier membership
-- order_info: Mapping of `order_id` to `customer_id` and `payment_method_id` for fast acces
+- order_info: Mapping of `order_id` to `customer_id` and `payment_method_id` for fast access
 
 #### Batch Flow
 Data is loaded into the Lakehouse following the Medallion Architecture.
@@ -179,7 +179,7 @@ To support both real-time responsiveness and scalable analytics, this project co
 	- Supporting Change Data Capture via Kafka Connect for syncing new orders in near real-time.
 	- Offering parallel processing through partitioned topics, allowing multiple consumers to handle multiple orders in parallel.
 
-- **Redis** is used to cache lookup data (e.g., products, diamond-tier customers, payment methods) to reduce excessive access database access and enable fast condition evaluation. This avoids redundant queries and supports low-latency processing at scale.
+- **Redis** is used to cache lookup data (e.g., products, diamond-tier customers, payment methods) to reduce excessive database access and enable fast condition evaluation. This avoids redundant queries and supports low-latency processing at scale.
 
 - **Apache Spark** is chosen to build the Lakehouse architecture:
 	- Handles both structured and semi-structured data.
