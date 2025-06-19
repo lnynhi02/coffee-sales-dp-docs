@@ -1216,7 +1216,7 @@
 <li>products: List of all available products</li>
 <li>payment_methods: Only ID of method bank transfer and bank name ACB</li>
 <li>diamond_customers: List of all customers with diamond-tier membership</li>
-<li>order_info: Mapping of <code>order_id</code> to <code>customer_id</code> and <code>payment_method_id</code> for fast acces</li>
+<li>order_info: Mapping of <code>order_id</code> to <code>customer_id</code> and <code>payment_method_id</code> for fast access</li>
 </ul>
 <h4 id="batch-flow">Batch Flow</h4>
 <p>Data is loaded into the Lakehouse following the Medallion Architecture.</p>
@@ -1236,7 +1236,7 @@
 </ul>
 </li>
 <li>
-<p><strong>Redis</strong> is used to cache lookup data (e.g., products, diamond-tier customers, payment methods) to reduce excessive access database access and enable fast condition evaluation. This avoids redundant queries and supports low-latency processing at scale.</p>
+<p><strong>Redis</strong> is used to cache lookup data (e.g., products, diamond-tier customers, payment methods) to reduce excessive database access and enable fast condition evaluation. This avoids redundant queries and supports low-latency processing at scale.</p>
 </li>
 <li>
 <p><strong>Apache Spark</strong> is chosen to build the Lakehouse architecture:</p>
