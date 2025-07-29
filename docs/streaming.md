@@ -268,8 +268,11 @@ Follow the instructions <a href="https://debezium.io/documentation/reference/sta
 Instead of running multiple commands manually, we have a PowerShell script `./setup-realtime-prerequisites.ps1` that automates the prerequisite setup, including:
 
 ✔️ Creating necessary tables in MySQL
+
 ✔️ Loading static file into the tables
+
 ✔️ Caching lookup data for later use
+
 ✔️ Registering the MySQL source connector
 
 1. **Creating necessary tables in MySQL** <br>
