@@ -987,11 +987,12 @@
 <li>updated_at: The date when the payment method data was last updated.</li>
 </ul>
 </li>
-<li><code>diamond_customers.csv</code>: List of diamond-tier customers.<ul>
+<li><code>customers.csv</code>: List of customers.<ul>
 <li>id: Unique identifier for the customer.</li>
 <li>name: The name of customer.</li>
 <li>phone_number: Customer’s phone number.</li>
-<li>updated_at: Timestamp of the last update to this diamond customer’s data.</li>
+<li>tier: Customer membership level</li>
+<li>updated_at: Timestamp of the last update to this customer’s data.</li>
 </ul>
 </li>
 <li><code>orders</code>: This data is generated automatically via a Python script. It includes detailed information about the orders info and loaded into MySQL.<ul>
@@ -1000,7 +1001,6 @@
 <li>store_id: The ID of the store where the order took place.</li>
 <li>payment_method_id: The payment method used for the order.</li>
 <li>customer_id: Customer who orders.</li>
-<li>status: The status of the orders (pending or completed).</li>
 </ul>
 </li>
 <li><code>order_details</code>: Auto-generated data representing products in each order (loaded into MySQL)<ul>
@@ -1215,7 +1215,7 @@
 <ul>
 <li>products: List of all available products</li>
 <li>payment_methods: Only ID of method bank transfer and bank name ACB</li>
-<li>diamond_customers: List of all customers with diamond-tier membership</li>
+<li>customers: List of all customers</li>
 <li>order_info: Mapping of <code>order_id</code> to <code>customer_id</code> and <code>payment_method_id</code> for fast access</li>
 </ul>
 <h4 id="batch-flow">Batch Flow</h4>
