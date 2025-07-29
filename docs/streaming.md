@@ -159,7 +159,7 @@ Finally, we configure Kafka Connect. The `commands` section downloads the requir
 ---
 
 ## 3. Redis
-Since real-time business logic is implemented (visit [here](index.md#real-time-processing-product-suggestion-logic) for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
+Since real-time business logic is implemented (visit [here](index.md#1-project-overview) for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
 ```py
   redis:
     image: redis/redis-stack:latest

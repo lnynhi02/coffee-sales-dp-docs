@@ -467,9 +467,75 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-real-time-pipeline-powershell-script" class="md-nav__link">
+  <a href="#run-the-real-time-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the Real-time Pipeline Powershell Script
+      Run the Real-time Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run the Real-time Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-required-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Start Required Containers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-prepare-real-time-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Prepare Real-time Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Prepare Real-time Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-enable-local_infile-on-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Enable local_infile on MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-enable-mysql-binary-logging-binlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Enable MySQL Binary Logging (binlog)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitor &amp; Alert
     </span>
   </a>
   
@@ -675,9 +741,75 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#run-the-real-time-pipeline-powershell-script" class="md-nav__link">
+  <a href="#run-the-real-time-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
-      Run the Real-time Pipeline Powershell Script
+      Run the Real-time Pipeline
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Run the Real-time Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-required-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Start Required Containers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-prepare-real-time-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Prepare Real-time Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Prepare Real-time Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-enable-local_infile-on-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Enable local_infile on MySQL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-enable-mysql-binary-logging-binlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. Enable MySQL Binary Logging (binlog)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-run-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Run the Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitor &amp; Alert
     </span>
   </a>
   
@@ -768,31 +900,54 @@
 These topics must be created before starting Kafka Connect, otherwise, the connector will fail to start.</p>
 <p>Additionally, we also pre-create the topic <code>mysql.coffee-shop.order_details</code>, which is the destination topic where Kafka Connect pushes CDC (Change Data Capture) events from the <code>order_details</code> table in MySQL.</p>
 <p>To ensure that the topics are created properly, we set up an <code>init-kafka</code> container. This container will wait until <strong>Kafka is fully ready</strong> before creating the required topics.
-</p><div class="highlight"><pre><span></span><code>  <span class="n">init</span><span class="o">-</span><span class="n">kafka</span><span class="p">:</span>
-    <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:3.5.1'</span>
-    <span class="n">container_name</span><span class="p">:</span> <span class="n">init</span><span class="o">-</span><span class="n">kafka</span>
-    <span class="n">depends_on</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
-      <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
-    <span class="n">networks</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">myNetwork</span>
-    <span class="n">entrypoint</span><span class="p">:</span> <span class="p">[</span><span class="s2">"/bin/bash"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">]</span>
-    <span class="n">command</span><span class="p">:</span> 
-      <span class="o">-</span> <span class="o">|</span>
-        <span class="n">echo</span> <span class="s2">"Waiting for Kafka to be ready..."</span>
-        <span class="k">while</span> <span class="err">!</span> <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span><span class="p">;</span> <span class="n">do</span>
-          <span class="n">sleep</span> <span class="mi">5</span>
-        <span class="n">done</span>
+</p><div class="highlight"><pre><span></span><code><span class="n">init</span><span class="o">-</span><span class="n">kafka</span><span class="p">:</span>
+  <span class="n">image</span><span class="p">:</span> <span class="s1">'bitnami/kafka:3.5.1'</span>
+  <span class="n">container_name</span><span class="p">:</span> <span class="n">init</span><span class="o">-</span><span class="n">kafka</span>
+  <span class="n">depends_on</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span>
+    <span class="o">-</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">2</span>
+  <span class="n">networks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">myNetwork</span>
+  <span class="n">entrypoint</span><span class="p">:</span> <span class="p">[</span><span class="s2">"/bin/bash"</span><span class="p">,</span> <span class="s2">"-c"</span><span class="p">]</span>
+  <span class="n">command</span><span class="p">:</span> 
+    <span class="o">-</span> <span class="o">|</span>
+      <span class="n">echo</span> <span class="s2">"Waiting for Kafka to be ready..."</span>
+      <span class="k">while</span> <span class="err">!</span> <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span><span class="p">;</span> <span class="n">do</span>
+        <span class="n">sleep</span> <span class="mi">5</span>
+      <span class="n">done</span>
 
-        <span class="n">echo</span> <span class="s2">"🚀 Kafka is ready. Creating topics ...... 🚀"</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">configs</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">10</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">offsets</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">5</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">status</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">5</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">topic</span> <span class="n">mysql</span><span class="o">.</span><span class="n">coffee_shop</span><span class="o">.</span><span class="n">order_details</span>
+      <span class="n">echo</span> <span class="s2">"🚀 Kafka is ready. Creating topics ...... 🚀"</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">1</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">1</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">configs</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">10</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">offsets</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">5</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">config</span> <span class="n">cleanup</span><span class="o">.</span><span class="n">policy</span><span class="o">=</span><span class="n">compact</span>  <span class="o">--</span><span class="n">topic</span> <span class="n">connect</span><span class="o">-</span><span class="n">status</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">3</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">topic</span> <span class="n">mysql</span><span class="o">.</span><span class="n">coffee_shop</span><span class="o">.</span><span class="n">order_details</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">2</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">topic</span> <span class="n">mysql</span><span class="o">.</span><span class="n">coffee_shop</span><span class="o">.</span><span class="n">orders</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">create</span> <span class="o">--</span><span class="k">if</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">exists</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="n">partitions</span> <span class="mi">2</span> <span class="o">--</span><span class="n">replication</span><span class="o">-</span><span class="n">factor</span> <span class="mi">2</span> <span class="o">--</span><span class="n">topic</span> <span class="n">order_ready_for_checking</span>
 
-        <span class="n">echo</span> <span class="s1">'🚀 Topic created successfully! 🚀'</span>
-        <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span>
+      <span class="n">echo</span> <span class="s1">'🚀 Topic created successfully! 🚀'</span>
+      <span class="n">kafka</span><span class="o">-</span><span class="n">topics</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">server</span> <span class="n">kafka</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">9092</span> <span class="o">--</span><span class="nb">list</span>
 </code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>We chose <strong>2 partitions and 2 replication factor</strong> for most topics based on our system's current load and hardware limitations.</p>
+<ul>
+<li>
+<p><strong>Throughput:</strong><br>
+  With an average rate of ~17 messages per second (i.e., 1000+ messages per minute), even <strong>1 partition</strong> could technically handle the load. However, because messages are keyed by <code>order_id</code> and some orders contain multiple products, there's a risk of <strong>data skew</strong>. Using <strong>3 partitions</strong> for <code>mysql.coffee_shop.order_details</code> helps <strong>distribute the load more evenly</strong>.</p>
+</li>
+<li>
+<p><strong>Replication:</strong><br>
+  Best practice recommends:</p>
+<ul>
+<li><strong>3 brokers</strong></li>
+<li><strong>3 replication factor</strong></li>
+<li><strong><code>min.insync.replicas</code> = 2</strong><br>
+  This setup ensures <strong>fault tolerance</strong> and <strong>data durability</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>👉 However, due to local machine constraints, I use only <strong>2 brokers</strong> and <strong>replication factor = 2</strong>, which still offers <strong>basic redundancy</strong>. It's <strong>not ideal to use a single broker</strong> in a streaming system because we need <strong>accurate and consistent data</strong> to execute real-time business logic. If that single broker goes down, the entire system would fail, potentially causing critical disruptions or financial loss.</p>
+</div>
 <hr>
 <h3 id="kafka-connect-configuration">Kafka Connect Configuration</h3>
 <p>Finally, we configure Kafka Connect. The <code>commands</code> section downloads the required MongoDB and Elasticsearch connector plugins.
@@ -833,7 +988,7 @@ These topics must be created before starting Kafka Connect, otherwise, the conne
 </code></pre></div>
 <hr>
 <h2 id="3-redis">3. Redis</h2>
-<p>Since real-time business logic is implemented (visit <a href="../#real-time-processing-product-suggestion-logic">here</a> for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
+<p>Since real-time business logic is implemented (visit <a href="../#1-project-overview">here</a> for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
 </p><div class="highlight"><pre><span></span><code>  <span class="n">redis</span><span class="p">:</span>
     <span class="n">image</span><span class="p">:</span> <span class="n">redis</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="n">stack</span><span class="p">:</span><span class="n">latest</span>
     <span class="n">container_name</span><span class="p">:</span> <span class="n">redis</span>
@@ -897,26 +1052,23 @@ Visit <a href="https://support.google.com/mail/answer/185833?hl=en" target="_bla
 <h2 id="5-run-the-streaming-script">5. Run the Streaming script</h2>
 <h4 id="execution-overview">Execution Overview 🎬</h4>
 <p>Before setting up the environment, here’s a quick demo of the streaming pipeline in action:<br>
-📽️
-<div class="video-container"><video style="position:relative;width:100%;height:22.172vw" muted controls alt="type:video"><source src="../videos/streaming-execution.mp4" type="video/mp4"></source></video></div></p>
-<h4 id="run-the-real-time-pipeline-powershell-script">Run the Real-time Pipeline Powershell Script</h4>
-<p>We can start the necessary containers and begin to execute our streaming pipeline.
-</p><div class="highlight"><pre><span></span><code><span class="n">docker-compose</span> <span class="n">up</span> <span class="n">-d</span> 
+📽️</p>
+<!-- ![type:video](./videos/streaming-execution.mp4){: style='width: 100%'} -->
+
+<h4 id="run-the-real-time-pipeline">Run the Real-time Pipeline</h4>
+<h5 id="1-start-required-containers">1. Start Required Containers</h5>
+<p>First, bring up all necessary containers for real-time streaming:</p>
+<div class="highlight"><pre><span></span><code><span class="n">docker-compose</span> <span class="o">-f</span> <span class="n">docker-compose-realtime</span><span class="p">.</span><span class="n">yaml</span> <span class="n">up</span> <span class="n">-d</span>
 </code></pre></div>
-<p>Before preceeding further, you must enable some necessary features:</p>
-<ul>
-<li>
-<p>Enable <code>local_infile</code> on the server side.<br>
-This is required because we use a script to load static data files into MySQL tables using the <code>LOAD DATA LOCAL INFILE</code> command. Without enabling this option, the script will fail to execute the data loading step.
-</p><div class="highlight"><pre><span></span><code>SET GLOBAL local_infile = 1;
+<h5 id="2-prepare-real-time-prerequisites">2. Prepare Real-time Prerequisites</h5>
+<p>Before starting the data pipeline, make sure the following prerequisites are met:</p>
+<h6 id="21-enable-local_infile-on-mysql">2.1. Enable <code>local_infile</code> on MySQL</h6>
+<p>This allows loading static data files using <code>LOAD DATA LOCAL INFILE</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">local_infile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 </code></pre></div>
-</li>
-<li>
-<p>Enable MySQL binary logging (binlog).<br>
-Follow the instructions <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#setting-up-mysql" target="_blank">here</a> to create the required user and enable the binlog.
+<h6 id="22-enable-mysql-binary-logging-binlog">2.2. Enable MySQL Binary Logging (binlog)</h6>
+<p>Follow the instructions <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#setting-up-mysql" target="_blank">here</a> to create the required user and enable the binlog.
 <code>mysql-src-connector.json</code>.</p>
-</li>
-</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you use a different username or password, make sure to update the following configuration in the <code>mysql-src-connector.json</code> file accordingly:
@@ -924,12 +1076,12 @@ Follow the instructions <a href="https://debezium.io/documentation/reference/sta
 "database.password": "dbz-user",
 </code></pre></div>
 </div>
-<p>Instead of running multiple commands manually, we have a PowerShell script <code>real-time.ps1</code> that automates the entire process, including:</p>
-<p>✔️ Creating necessary tables in MySQL</p>
-<p>✔️ Loading static file into the tables</p>
-<p>✔️ Caching lookup data for later use</p>
-<p>✔️ Registering the MySQL source connector</p>
-<p>✔️ Runing the Kafka client to handle new events</p>
+<hr>
+<p>Instead of running multiple commands manually, we have a PowerShell script <code>./setup-realtime-prerequisites.ps1</code> that automates the prerequisite setup, including:</p>
+<p>✔️ Creating necessary tables in MySQL
+✔️ Loading static file into the tables
+✔️ Caching lookup data for later use
+✔️ Registering the MySQL source connector</p>
 <ol>
 <li>
 <p><strong>Creating necessary tables in MySQL</strong> <br>
@@ -964,13 +1116,6 @@ Register the MySQL source connector using the <code>mysql-src-connector.json</co
 </code></pre></div>
 Refer to <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html" target="_blank">MySQL Kafka Connector Configuration Properties</a> for more details.
 </li>
-<li>
-<p><strong>Executing the Kafka Client</strong>
-Start the Kafka client to consume new events and execute real-time business logic (e.g., product suggestions).
-</p><div class="highlight"><pre><span></span><code><span class="c"># Start the Kafka client to listen for new order events and handle product suggestions logic</span>
-<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">real-time</span><span class="p">/</span><span class="n">kafka_client</span><span class="p">.</span><span class="n">py</span>
-</code></pre></div>
-</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -990,33 +1135,40 @@ You can increase or decrease the number of partitions and update the <code>num_w
 </code></pre></div>
 </div>
 <hr>
-<p>Full script in the <code>real-time.ps1</code> file.</p>
-<p>Once all containers are <strong>ready and healthy</strong>, you can access the following services:</p>
+<h5 id="3-run-the-pipeline">3. Run the Pipeline</h5>
+<p>Once all containers are <strong>ready and healthy</strong>, and the prerequisites are configured, you can:</p>
 <ul>
 <li>
-<p>Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a></p>
-</li>
-<li>
-<p>Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a></p>
-</li>
-<li>
-<p>Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a></p>
-</li>
-<li>
-<p>Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a></p>
-</li>
+<p>Access services:</p>
+<ul>
+<li>Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a></li>
+<li>Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a></li>
 </ul>
-<p>Execute the following command to run the entire pipeline setup:
-</p><div class="highlight"><pre><span></span><code><span class="p">.\</span><span class="n">real-time</span><span class="p">.</span><span class="n">ps1</span>
+</li>
+<li>
+<p>Launch consumer workers:
+</p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">real-time</span><span class="p">/</span><span class="n">order_consumer</span><span class="p">.</span><span class="n">py</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">real-time</span><span class="p">/</span><span class="n">order_details_consumer</span><span class="p">.</span><span class="n">py</span>
+<span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">real-time</span><span class="p">/</span><span class="n">check_and_recommendation</span><span class="p">.</span><span class="n">py</span>
 </code></pre></div>
-<p>Then, run the script below to update the order status:
-</p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">update_order_status</span><span class="p">.</span><span class="n">py</span>
-</code></pre></div>
-<p>Next, start streaming data into the system:
+</li>
+<li>
+<p>Then, start sending data into the system:
 </p><div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">scripts</span><span class="p">/</span><span class="n">database</span><span class="p">/</span><span class="n">generate_data</span><span class="p">.</span><span class="n">py</span>
 </code></pre></div>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Each script includes a comment header that explains what it does and why it’s used. Feel free to check them out.</p>
+</div>
 <p>You can view the demo in the <a href="./#execution-overview">Execution Overview</a>.</p>
 <hr>
+<h4 id="monitor-alert">Monitor &amp; Alert</h4>
+<ul>
+<li>Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a></li>
+<li>Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a></li>
+</ul>
 <p>If an alert condition is triggered (e.g., a Kafka broker goes down or a Kafka Connect task fails), an email notification will be sent as shown below:</p>
 <p><a class="glightbox" href="../img/alert.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="../img/alert.png"></a></p>
 <hr></div>
