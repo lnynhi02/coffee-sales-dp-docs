@@ -50,18 +50,18 @@ The data is divided into several CSV files and used as follows:
 	- method_name: The name of the payment method (e.g., Cash, Credit Card, etc.)
 	- bank: Bank associated with the method (used for bank transfer only).
 	- updated_at: The date when the payment method data was last updated.
-5. `diamond_customers.csv`: List of diamond-tier customers.
+5. `customers.csv`: List of customers.
 	- id: Unique identifier for the customer.
 	- name: The name of customer.
 	- phone_number: Customer’s phone number.
-	- updated_at: Timestamp of the last update to this diamond customer’s data.
+	- tier: Customer membership level
+	- updated_at: Timestamp of the last update to this customer’s data.
 6. `orders`: This data is generated automatically via a Python script. It includes detailed information about the orders info and loaded into MySQL.
 	- id: Unique ID for each order.
 	- timestamp: Date and time when the order was placed.
 	- store_id: The ID of the store where the order took place.
 	- payment_method_id: The payment method used for the order.
 	- customer_id: Customer who orders.
-	- status: The status of the orders (pending or completed).
 7. `order_details`: Auto-generated data representing products in each order (loaded into MySQL)
 	- order_id: Identifier linking to the corresponding order.
 	- product_id: ID of the purchased product.
@@ -162,7 +162,7 @@ Since condition checks are performed continuously in real time, lookup tables ar
 
 - products: List of all available products
 - payment_methods: Only ID of method bank transfer and bank name ACB
-- diamond_customers: List of all customers with diamond-tier membership
+- customers: List of all customers
 - order_info: Mapping of `order_id` to `customer_id` and `payment_method_id` for fast access
 
 #### Batch Flow

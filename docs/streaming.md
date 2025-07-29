@@ -73,31 +73,49 @@ Additionally, we also pre-create the topic `mysql.coffee-shop.order_details`, wh
 
 To ensure that the topics are created properly, we set up an `init-kafka` container. This container will wait until **Kafka is fully ready** before creating the required topics.
 ```py
-  init-kafka:
-    image: 'bitnami/kafka:3.5.1'
-    container_name: init-kafka
-    depends_on:
-      - kafka-1
-      - kafka-2
-    networks:
-      - myNetwork
-    entrypoint: ["/bin/bash", "-c"]
-    command: 
-      - |
-        echo "Waiting for Kafka to be ready..."
-        while ! kafka-topics.sh --bootstrap-server kafka-1:9092 --list; do
-          sleep 5
-        done
+init-kafka:
+  image: 'bitnami/kafka:3.5.1'
+  container_name: init-kafka
+  depends_on:
+    - kafka-1
+    - kafka-2
+  networks:
+    - myNetwork
+  entrypoint: ["/bin/bash", "-c"]
+  command: 
+    - |
+      echo "Waiting for Kafka to be ready..."
+      while ! kafka-topics.sh --bootstrap-server kafka-1:9092 --list; do
+        sleep 5
+      done
 
-        echo "🚀 Kafka is ready. Creating topics ...... 🚀"
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-configs
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 10 --replication-factor 2 --config cleanup.policy=compact  --topic connect-offsets
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 5 --replication-factor 2 --config cleanup.policy=compact  --topic connect-status
-        kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 5 --replication-factor 2 --topic mysql.coffee_shop.order_details
+      echo "🚀 Kafka is ready. Creating topics ...... 🚀"
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 1 --replication-factor 1 --config cleanup.policy=compact  --topic connect-configs
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 10 --replication-factor 2 --config cleanup.policy=compact  --topic connect-offsets
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 5 --replication-factor 2 --config cleanup.policy=compact  --topic connect-status
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 3 --replication-factor 2 --topic mysql.coffee_shop.order_details
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 2 --replication-factor 2 --topic mysql.coffee_shop.orders
+      kafka-topics.sh --create --if-not-exists --bootstrap-server kafka-1:9092 --partitions 2 --replication-factor 2 --topic order_ready_for_checking
 
-        echo '🚀 Topic created successfully! 🚀'
-        kafka-topics.sh --bootstrap-server kafka-1:9092 --list
+      echo '🚀 Topic created successfully! 🚀'
+      kafka-topics.sh --bootstrap-server kafka-1:9092 --list
 ```
+
+!!! info
+    We chose **2 partitions and 2 replication factor** for most topics based on our system's current load and hardware limitations.
+
+    - **Throughput:**  
+      With an average rate of ~17 messages per second (i.e., 1000+ messages per minute), even **1 partition** could technically handle the load. However, because messages are keyed by `order_id` and some orders contain multiple products, there's a risk of **data skew**. Using **3 partitions** for `mysql.coffee_shop.order_details` helps **distribute the load more evenly**.
+
+    - **Replication:**  
+      Best practice recommends:
+        - **3 brokers**
+        - **3 replication factor**
+        - **`min.insync.replicas` = 2**  
+      This setup ensures **fault tolerance** and **data durability**.
+
+      👉 However, due to local machine constraints, I use only **2 brokers** and **replication factor = 2**, which still offers **basic redundancy**. It's **not ideal to use a single broker** in a streaming system because we need **accurate and consistent data** to execute real-time business logic. If that single broker goes down, the entire system would fail, potentially causing critical disruptions or financial loss.
+
 ---
 
 ### Kafka Connect Configuration
@@ -213,24 +231,30 @@ SMTP_FROM_ADDRESS=alert_sender@example.com
 #### Execution Overview 🎬
 Before setting up the environment, here’s a quick demo of the streaming pipeline in action:<br>
 📽️
-![type:video](./videos/streaming-execution.mp4){: style='width: 100%'}
+<!-- ![type:video](./videos/streaming-execution.mp4){: style='width: 100%'} -->
 
-#### Run the Real-time Pipeline Powershell Script
+#### Run the Real-time Pipeline
 
-We can start the necessary containers and begin to execute our streaming pipeline.
+##### 1. Start Required Containers
+
+First, bring up all necessary containers for real-time streaming:
+
 ```powershell
-docker-compose up -d 
+docker-compose -f docker-compose-realtime.yaml up -d
 ```
 
-Before preceeding further, you must enable some necessary features:
+##### 2. Prepare Real-time Prerequisites
+Before starting the data pipeline, make sure the following prerequisites are met:
 
-- Enable `local_infile` on the server side.<br>
-This is required because we use a script to load static data files into MySQL tables using the `LOAD DATA LOCAL INFILE` command. Without enabling this option, the script will fail to execute the data loading step.
-```
+###### 2.1. Enable `local_infile` on MySQL
+This allows loading static data files using `LOAD DATA LOCAL INFILE`:
+
+```sql
 SET GLOBAL local_infile = 1;
 ```
 
-- Enable MySQL binary logging (binlog).<br>
+###### 2.2. Enable MySQL Binary Logging (binlog)
+
 Follow the instructions <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#setting-up-mysql" target="_blank">here</a> to create the required user and enable the binlog.
 `mysql-src-connector.json`.
 !!! note
@@ -239,18 +263,14 @@ Follow the instructions <a href="https://debezium.io/documentation/reference/sta
     "database.user": "dbz-user",
     "database.password": "dbz-user",
     ```
+---
     
-Instead of running multiple commands manually, we have a PowerShell script `real-time.ps1` that automates the entire process, including:
+Instead of running multiple commands manually, we have a PowerShell script `./setup-realtime-prerequisites.ps1` that automates the prerequisite setup, including:
 
 ✔️ Creating necessary tables in MySQL
-
 ✔️ Loading static file into the tables
-
 ✔️ Caching lookup data for later use
-
 ✔️ Registering the MySQL source connector
-
-✔️ Runing the Kafka client to handle new events
 
 1. **Creating necessary tables in MySQL** <br>
 The first step is to create all the tables required for this project.
@@ -285,12 +305,6 @@ Write-Host "============================================================"
 ```
 Refer to <a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html" target="_blank">MySQL Kafka Connector Configuration Properties</a> for more details.
 
-5. **Executing the Kafka Client**
-Start the Kafka client to consume new events and execute real-time business logic (e.g., product suggestions).
-```powershell
-# Start the Kafka client to listen for new order events and handle product suggestions logic
-python scripts/real-time/kafka_client.py
-```
 !!! note
     The number of Kafka consumers should be **less than or equal** to the number of partitions to ensure proper parallel processing.<br>
     You can increase or decrease the number of partitions and update the `num_workers` value accordingly (e.g., `num_workers=3` means 3 parallel consumer processes).
@@ -308,36 +322,36 @@ python scripts/real-time/kafka_client.py
         p.join()
     ```
 ---
-Full script in the `real-time.ps1` file.
 
-Once all containers are **ready and healthy**, you can access the following services:
+##### 3. Run the Pipeline
 
-- Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
+Once all containers are **ready and healthy**, and the prerequisites are configured, you can:
 
-- Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a>
+- Access services:
+    - Kafka UI: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
+    - Kafka Connect UI: <a href="http://localhost:8083" target="_blank">localhost:8083</a>
 
-- Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a>
-
-- Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a>
-
-Execute the following command to run the entire pipeline setup:
+- Launch consumer workers:
 ```powershell
-.\real-time.ps1
+python scripts/real-time/order_consumer.py
+python scripts/real-time/order_details_consumer.py
+python scripts/real-time/check_and_recommendation.py
 ```
 
-Then, run the script below to update the order status:
-```powershell
-python scripts/database/update_order_status.py
-```
-
-Next, start streaming data into the system:
+- Then, start sending data into the system:
 ```powershell
 python scripts/database/generate_data.py
 ```
 
+!!! info
+    Each script includes a comment header that explains what it does and why it’s used. Feel free to check them out.
 You can view the demo in the [Execution Overview](streaming.md#execution-overview).
 
 ---
+
+#### Monitor & Alert
+- Prometheus: <a href="http://localhost:9090" target="_blank">localhost:9090</a>
+- Grafana: <a href="http://localhost:3000" target="_blank">localhost:3000</a>
 
 If an alert condition is triggered (e.g., a Kafka broker goes down or a Kafka Connect task fails), an email notification will be sent as shown below:
 
