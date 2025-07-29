@@ -231,7 +231,7 @@ SMTP_FROM_ADDRESS=alert_sender@example.com
 #### Execution Overview 🎬
 Before setting up the environment, here’s a quick demo of the streaming pipeline in action:<br>
 📽️
-<!-- ![type:video](./videos/streaming-execution.mp4){: style='width: 100%'} -->
+![type:video](./videos/streaming.mp4){: style='width: 100%'}
 
 #### Run the Real-time Pipeline
 
