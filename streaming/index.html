@@ -988,7 +988,7 @@ These topics must be created before starting Kafka Connect, otherwise, the conne
 </code></pre></div>
 <hr>
 <h2 id="3-redis">3. Redis</h2>
-<p>Since real-time business logic is implemented (visit <a href="../#real-time-processing-product-suggestion-logic">here</a> for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
+<p>Since real-time business logic is implemented (visit <a href="../#1-project-overview">here</a> for more details), the system needs to access data from the database for processing. To reduce load and improve performance, Redis is used to cache data that is frequently accessed but infrequently updated, minimizing database queries.
 </p><div class="highlight"><pre><span></span><code>  <span class="n">redis</span><span class="p">:</span>
     <span class="n">image</span><span class="p">:</span> <span class="n">redis</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="n">stack</span><span class="p">:</span><span class="n">latest</span>
     <span class="n">container_name</span><span class="p">:</span> <span class="n">redis</span>
