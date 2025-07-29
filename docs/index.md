@@ -18,7 +18,7 @@ When a new order is placed, the system should evaluate whether it qualifies for 
 - The payment method is *bank transfer*, and the bank is *ACB*
 - The customer is a *diamond-tier member*
 
-If all conditions are met, a product with a special discount is suggested — different from those already ordered. We will assume that all product suggestions are accepted by customers.
+If all conditions are met, a product with a special discount is suggested — different from those already ordered. The condition check and product suggestion must be performed with minimal latency, as the process is expected to occur **almost instantly**. We will assume that all product suggestions are accepted by customers.
 
 ##### Batch: Daily Analytics Preparation
 Each day, raw data is processed to support reporting and dashboarding. This includes:
