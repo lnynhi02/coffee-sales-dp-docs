@@ -9,6 +9,8 @@ This project simulates a data system for a coffee shop chain with two primary go
 
 It is designed to strike a balance between *low-latency business needs* and *scalable analytical workloads*, using a hybrid architecture that includes both streaming and batch components.
 
+The system processes an average of **~17 events per second** (i.e., over **1000 order item events per minute**).
+
 ### 2. Business Requirements
 ##### Real-Time: Product Suggestion
 When a new order is placed, the system should evaluate whether it qualifies for a product suggestion. The following conditions must be met:
