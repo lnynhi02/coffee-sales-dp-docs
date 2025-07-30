@@ -346,7 +346,7 @@ python scripts/real-time/check_and_recommendation.py
 python scripts/database/generate_data.py
 ```
 
-!!! info
+!!! note
     Each script includes a comment header that explains what it does and why it’s used. Feel free to check them out.
 You can view the demo in the [Execution Overview](streaming.md#execution-overview).
 

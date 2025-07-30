@@ -1015,7 +1015,7 @@
 </li>
 </ol>
 <h3 id="4-architecture-at-a-glance">4. Architecture at a Glance</h3>
-<p><a class="glightbox" href="img/task-flow.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/task-flow.png"></a></p>
+<p><a class="glightbox" href="img/index/task-flow.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/index/task-flow.png"></a></p>
 <p>The system separates responsibilities into two pipelines:</p>
 <ul>
 <li>Real-time pipeline: Handles event-driven product suggestion logic upon new orders</li>
@@ -1030,7 +1030,7 @@
 </ul>
 <p>This layer includes core tables such as <code>orders</code>, <code>order_details</code>, and reference tables like <code>products</code>, <code>stores</code>, <code>payment_methods</code>, etc.,</p>
 <p>The ER diagram below illustrates the relationships between the core tables:
-<a class="glightbox" href="img/database-design.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/database-design.png"></a></p>
+<a class="glightbox" href="img/index/database-design.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/index/database-design.png"></a></p>
 <h3 id="6-lakehouse-architecture">6. Lakehouse Architecture</h3>
 <p>In the lakehouse, we structure data using the <em>Medallion Architecture</em>:</p>
 <ul>
@@ -1038,9 +1038,9 @@
 <li><strong>Silver</strong>: cleaned, transformed and joined data</li>
 <li><strong>Gold</strong>: aggregated and business-consumable data for dashboarding and analytics</li>
 </ul>
-<p><a class="glightbox" href="img/data-flow.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/data-flow.png"></a></p>
+<p><a class="glightbox" href="img/index/data-flow.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/index/data-flow.png"></a></p>
 <h4 id="data-model-in-gold-layer">Data Model in Gold Layer</h4>
-<p><a class="glightbox" href="img/star-schema.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/star-schema.png"></a></p>
+<p><a class="glightbox" href="img/index/star-schema.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/index/star-schema.png"></a></p>
 <h4 id="gold-layer-data-catalog">Gold Layer Data Catalog</h4>
 <h5 id="glddim_products">gld.dim_products</h5>
 <p>Provides information about the products and their attributes.</p>
@@ -1202,7 +1202,7 @@
 </tbody>
 </table>
 <h3 id="7-data-pipeline-design">7. Data Pipeline Design</h3>
-<p><a class="glightbox" href="img/data-pipeline-v1.1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/data-pipeline-v1.1.png"></a></p>
+<p><a class="glightbox" href="img/data-pipeline-v1.1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="Image" src="img/data-pipeline-v1.1.png"></a></p>
 <h4 id="real-time-flow">Real-time Flow</h4>
 <p>Order events are captured via Kafka Connect from MySQL. And Kafka Consumers check the following conditions to determine whether a product suggestion should be made:</p>
 <ul>
@@ -1214,10 +1214,9 @@
 <h5 id="caching-strategy-for-real-time-processing">Caching Strategy for Real-time Processing</h5>
 <p>Since condition checks are performed continuously in real time, lookup tables are cached in Redis to optimize performance:</p>
 <ul>
-<li>products: List of all available products</li>
-<li>payment_methods: Only ID of method bank transfer and bank name ACB</li>
-<li>customers: List of all customers</li>
-<li>order_info: Mapping of <code>order_id</code> to <code>customer_id</code> and <code>payment_method_id</code> for fast access</li>
+<li><code>products</code>: List of all available products</li>
+<li><code>payment_methods</code>: Only ID of method bank transfer and bank name ACB</li>
+<li><code>diamond_customers</code>: List of all diamond-tier customers</li>
 </ul>
 <h4 id="batch-flow">Batch Flow</h4>
 <p>Data is loaded into the Lakehouse following the Medallion Architecture.</p>
