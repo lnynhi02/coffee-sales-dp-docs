@@ -358,6 +358,6 @@ You can view the demo in the [Execution Overview](streaming.md#execution-overvie
 
 If an alert condition is triggered (e.g., a Kafka broker goes down or a Kafka Connect task fails), an email notification will be sent as shown below:
 
-![Image](img/alert.png)
+![Image](img/streaming/grafana-alert.png)
 
 ---

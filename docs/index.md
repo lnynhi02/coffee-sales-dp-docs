@@ -73,7 +73,7 @@ The data is divided into several CSV files and used as follows:
 	- is_suggestion: Indicates whether this product was suggested (used in business logic).
 
 ### 4. Architecture at a Glance
-![Image](img/task-flow.png)
+![Image](img/index/task-flow.png)
 
 The system separates responsibilities into two pipelines:
 
@@ -90,7 +90,7 @@ MySQL is used as the initial data store for real-time order generation, chosen f
 This layer includes core tables such as `orders`, `order_details`, and reference tables like `products`, `stores`, `payment_methods`, etc.,
 
 The ER diagram below illustrates the relationships between the core tables:
-![Image](img/database-design.png)
+![Image](img/index/database-design.png)
 
 ### 6. Lakehouse Architecture
 In the lakehouse, we structure data using the *Medallion Architecture*:
@@ -99,10 +99,10 @@ In the lakehouse, we structure data using the *Medallion Architecture*:
 - **Silver**: cleaned, transformed and joined data
 - **Gold**: aggregated and business-consumable data for dashboarding and analytics
 
-![Image](img/data-flow.png)
+![Image](img/index/data-flow.png)
 
 #### Data Model in Gold Layer
-![Image](img/star-schema.png)
+![Image](img/index/star-schema.png)
 
 #### Gold Layer Data Catalog
 ##### gld.dim_products
@@ -162,10 +162,9 @@ If all conditions are satisfied, the system suggests a product different from th
 ##### Caching Strategy for Real-time Processing
 Since condition checks are performed continuously in real time, lookup tables are cached in Redis to optimize performance:
 
-- products: List of all available products
-- payment_methods: Only ID of method bank transfer and bank name ACB
-- customers: List of all customers
-- order_info: Mapping of `order_id` to `customer_id` and `payment_method_id` for fast access
+- `products`: List of all available products
+- `payment_methods`: Only ID of method bank transfer and bank name ACB
+- `diamond_customers`: List of all diamond-tier customers
 
 #### Batch Flow
 Data is loaded into the Lakehouse following the Medallion Architecture.

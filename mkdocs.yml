@@ -54,8 +54,6 @@ plugins:
       loop: false
       effect: zoom
       slide_effect: slide
-      width: 100%
-      height: auto
       zoomable: true
       draggable: true
       skip_classes:
