@@ -12,7 +12,7 @@ It is designed to strike a balance between *low-latency business needs* and *sca
 The system processes an average of **~17 events per second** (i.e., over **1000 order item events per minute**).
 
 ### 2. Business Requirements
-##### Real-Time: Product Suggestion
+#### Real-Time: Product Suggestion
 When a new order is placed, the system should evaluate whether it qualifies for a product suggestion. The following conditions must be met:
 
 - The payment method is *bank transfer*, and the bank is *ACB*
@@ -20,7 +20,7 @@ When a new order is placed, the system should evaluate whether it qualifies for 
 
 If all conditions are met, a product with a special discount is suggested — different from those already ordered. The condition check and product suggestion must be performed with minimal latency, as the process is expected to occur **almost instantly**. We will assume that all product suggestions are accepted by customers.
 
-##### Batch: Daily Analytics Preparation
+#### Batch: Daily Analytics Preparation
 Each day, raw data is processed to support reporting and dashboarding. This includes:
 
 - Ingest: Load new data from MySQL into the lakehouse
